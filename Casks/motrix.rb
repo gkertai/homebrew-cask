@@ -1,9 +1,18 @@
 cask "motrix" do
-  version "1.6.8"
-  sha256 "6e7790a97c5c09ac3285ca90238a59276fd6d6b29d2d60ceaf8ad83ef23ef6d9"
+  version "1.6.11"
 
-  url "https://github.com/agalwood/Motrix/releases/download/v#{version}/Motrix-#{version}.dmg",
-      verified: "github.com/"
+  if Hardware::CPU.intel?
+    sha256 "70fa245e44b8e0ec62f50ba5731bc0a876535a51dc0ea318010736d2a6be6dd9"
+
+    url "https://github.com/agalwood/Motrix/releases/download/v#{version}/Motrix-#{version}.dmg",
+        verified: "github.com/agalwood/Motrix/"
+  else
+    sha256 "1705d6ef4781c17ebf19007dbb2ac52f6227592c783e91ad5b81a1432cf6b668"
+
+    url "https://github.com/agalwood/Motrix/releases/download/v#{version}/Motrix-#{version}-arm64.dmg",
+        verified: "github.com/agalwood/Motrix/"
+  end
+
   name "Motrix"
   desc "Open-source download manager"
   homepage "https://motrix.app/"

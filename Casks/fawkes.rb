@@ -13,6 +13,8 @@ cask "fawkes" do
     regex(%r{href=.*?/Fawkes-(\d+(?:\.\d+)*)\.dmg}i)
   end
 
+  depends_on macos: ">= :high_sierra"
+
   app "Fawkes.app"
 
   zap trash: [
