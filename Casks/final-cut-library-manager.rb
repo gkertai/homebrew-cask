@@ -14,4 +14,8 @@ cask "final-cut-library-manager" do
   end
 
   app "Final Cut Library Manager.app"
+
+  zap trash: [
+    "~/Library/Application Support/Final Cut Library Manager",
+  ]
 end
