@@ -1,25 +1,25 @@
 cask "serviio" do
-  version "2.1"
-  sha256 "2a6d948c00205c5c4cf60127ed94a8e0e6965a145e5162b298f3108492f73cae"
+  version "2.3.1"
+  sha256 "da24966b2d4057afc7c0a4910ad0c37c360573866037712cd488b696244e1a20"
 
   url "https://download.serviio.org/releases/serviio-#{version}-osx.tar.gz"
   name "Serviio"
+  desc "Media server"
   homepage "https://serviio.org/"
 
   livecheck do
     url "https://www.serviio.org/download"
-    strategy :page_match
-    regex(%r{href=.*?/serviio-(\d+(?:\.\d+)*)-osx\.tar\.gz}i)
+    regex(%r{href=.*?/serviio-(\d+(?:\.\d+)+)-osx\.t}i)
   end
 
   pkg "Serviio-#{version}.pkg"
 
   uninstall pkgutil:   [
-    "org.serviio.pkg.autostart",
-    "org.serviio.pkg.JRE",
-    "org.serviio.pkg.ServiioConsole",
-    "org.serviio.pkg.Serviio",
-  ],
+              "org.serviio.pkg.autostart",
+              "org.serviio.pkg.JRE",
+              "org.serviio.pkg.ServiioConsole",
+              "org.serviio.pkg.Serviio",
+            ],
             launchctl: "org.serviio.server"
 
   zap trash: [

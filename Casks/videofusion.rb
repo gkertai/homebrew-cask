@@ -1,30 +1,27 @@
 cask "videofusion" do
-  version "1.2.5.0"
-  sha256 "ba68157a96763f2547ae4e710c3bf64f6eea5bff96d603ad272302cd92e2672c"
+  version "3.6.5.8068"
+  sha256 "fd2af9995dc65628d310bfa686962dfe86391ebb6f501ff7385951e7c92a3bd4"
 
-  url "https://lf3-faceucdn-tos.pstatp.com/obj/faceu-packages/Jianying_Pro_#{version.dots_to_underscores}.pkg",
-      verified: "lf3-faceucdn-tos.pstatp.com/obj/faceu-packages/"
+  url "https://lf3-package.vlabstatic.com/obj/faceu-packages/Jianying_#{version.dots_to_underscores}_jianyingpro_0.dmg",
+      verified: "lf3-package.vlabstatic.com/obj/faceu-packages/"
   name "VideoFusion"
   name "剪映专业版"
   desc "Video editor"
   homepage "https://lv.ulikecam.com/"
 
   livecheck do
-    skip "No version information available"
+    url "https://lf3-beecdn.bytetos.com/obj/ies-fe-bee/bee_prod/biz_80/bee_prod_80_bee_publish_3563.json"
+    strategy :page_match do |page|
+      JSON.parse(page)["mac_download_pkg"]["channel_default"][/(\d+(?:_\d+)+).*\.dmg/i, 1].tr("_", ".")
+    end
   end
 
   depends_on macos: ">= :mojave"
 
-  pkg "Jianying_Pro_#{version.dots_to_underscores}.pkg"
-
-  uninstall pkgutil: [
-    "com.lemon.lvpro",
-    "com.mygreatcompany.pkg.lvpro",
-  ]
+  app "VideoFusion-macOS.app"
 
   zap trash: [
-    "~/Library/Caches/com.lemon.ee.lv",
-    "~/Library/Preferences/com.lemon.ee.lv.plist",
-    "~/Library/Saved Application State/com.lemon.ee.lv.savedState",
+    "~/Library/Application Scripts/com.lemon.lvpro",
+    "~/Library/Containers/com.lemon.lvpro",
   ]
 end

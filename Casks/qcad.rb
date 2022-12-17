@@ -1,12 +1,16 @@
 cask "qcad" do
-  version "3.26.2"
+  arch arm: "11-12-arm64", intel: "10.14-12"
 
-  if MacOS.version <= :high_sierra
-    sha256 "d1c06bf0f2fc7df0bbe2f428e159c7aa12f13537141bc69d8e5dee1c793047b6"
+  version "3.27.8"
+  sha256 arm:   "ca6caa224d007e184e4b48895117611b20e1b8d28e85e97be53cf54c4fac5a4e",
+         intel: "418d5a29ee34b69643c65aa0dc43f0655db977ff6f6cc08a157a3ee87b4cb298"
+
+  url "https://www.qcad.org/archives/qcad/qcad-#{version}-trial-macos-#{arch}.dmg"
+
+  on_high_sierra :or_older do
+    sha256 "589a84168c38bf57435441511b19fa081b622e009719c4be7cc1385b7dc55eeb"
+
     url "https://www.qcad.org/archives/qcad/qcad-#{version}-trial-macos-10.10-10.13.dmg"
-  else
-    sha256 "46fb356960449ae4addf0ce1555872bad5d1b70aaf8f94c10793f5f61e429695"
-    url "https://www.qcad.org/archives/qcad/qcad-#{version}-trial-macos-10.14-11.2.dmg"
   end
 
   name "QCAD"
@@ -15,8 +19,7 @@ cask "qcad" do
 
   livecheck do
     url "https://www.qcad.org/en/download"
-    strategy :page_match
-    regex(%r{href=.*?/qcad-(\d+(?:\.\d+)*)-trial-macos-10\.14-11\.2\.dmg}i)
+    regex(/qcad[._-]v?(\d+(?:\.\d+)+)[._-]trial[._-]macos[._-]#{arch}\.dmg/i)
   end
 
   app "QCAD.app"

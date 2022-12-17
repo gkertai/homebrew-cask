@@ -2,9 +2,12 @@ cask "lingon-x" do
   if MacOS.version <= :high_sierra
     version "6.6.5"
     sha256 "b0231b1a98dcc8f5c4234b419c9f5331407b8cce29b33f0ea2e32b12595adfa8"
+  elsif MacOS.version <= :big_sur
+    version "8.4.9"
+    sha256 "c1c839e8dc13bd295f2080980c5bea22299c33f3333b7c6981161b46d6f021d8"
   else
-    version "8.2.2"
-    sha256 "3ccc182bb72dc425ac551677c34a3bea54b24b433a4c8b0e2939b1f193f42f49"
+    version "9.1.2"
+    sha256 "9b522288fac8acd43cd48012bce490953e898f3d7c1fa39d32087a296c95c7f5"
   end
 
   url "https://www.peterborgapps.com/downloads/LingonX#{version.major}.zip"
@@ -14,8 +17,7 @@ cask "lingon-x" do
 
   livecheck do
     url "https://www.peterborgapps.com/updates/lingonx#{version.major}.plist"
-    strategy :page_match
-    regex(%r{<key>version</key>\s*\n\s*<string>(\d+(?:\.\d+)*)</string>}i)
+    regex(%r{<key>version</key>\s*\n\s*<string>(\d+(?:\.\d+)+)</string>}i)
   end
 
   depends_on macos: ">= :high_sierra"

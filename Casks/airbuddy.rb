@@ -1,8 +1,8 @@
 cask "airbuddy" do
-  version "2.3.2,282"
-  sha256 "f744d3c125a763eed3a4d6c1f6d5c79ef6100ab44577ff4ed66053a72c39ea98"
+  version "2.6.3,602"
+  sha256 "abf31b926f74a6d2247532d5d8a0d3f423361ecc679306b2e45c3417a77b4ea7"
 
-  url "https://su.airbuddy.app/kCRSAmcjBc/AirBuddy_v#{version.before_comma}-#{version.after_comma}.dmg"
+  url "https://su.airbuddy.app/kCRSAmcjBc/AirBuddy_v#{version.csv.first}-#{version.csv.second}.dmg"
   name "AirBuddy"
   desc "AirPods companion app"
   homepage "https://airbuddy.app/"
@@ -13,6 +13,7 @@ cask "airbuddy" do
   end
 
   auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "AirBuddy.app"
 
@@ -21,7 +22,7 @@ cask "airbuddy" do
     "~/Library/Caches/codes.rambo.AirBuddy",
     "~/Library/Caches/codes.rambo.AirCore",
     "~/Library/Containers/codes.rambo.AirBuddy*",
-    "~/Library/Group Containers/8C7439RJLG.group.codes.rambo.AirBuddy",
+    "~/Library/Group Containers/*.group.codes.rambo.AirBuddy",
     "~/Library/HTTPStorages/codes.rambo.AirBuddy.binarycookies",
     "~/Library/LaunchAgents/codes.rambo.AirBuddyHelper.plist",
     "~/Library/Preferences/codes.rambo.AirBuddy.plist",

@@ -1,6 +1,6 @@
 cask "fastrawviewer" do
-  version "1.7.3.1715"
-  sha256 "20954531bb166864f500c3d0fed4d75bb364c164ff576fb5839fc41f239d05e1"
+  version "2.0.5.1945"
+  sha256 "b957ad7176737bfe447feea7b682de2e2bd9ecfd5c14bc3e427f83471f6d8d32"
 
   url "https://updates.fastrawviewer.com/data/FastRawViewer-#{version}.dmg"
   name "FastRawViewer"
@@ -9,9 +9,12 @@ cask "fastrawviewer" do
 
   livecheck do
     url "https://updates.fastrawviewer.com/data/"
-    strategy :page_match
-    regex(/FastRawViewer-(\d+(?:\.\d+)*)\.dmg/i)
+    regex(/FastRawViewer[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
+  depends_on macos: ">= :sierra"
+
   app "FastRawViewer.app"
+
+  zap trash: "~/Library/Preferences/com.libraw-llc.FastRawViewer.plist"
 end

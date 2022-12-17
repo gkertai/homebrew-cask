@@ -1,20 +1,19 @@
 cask "drovio" do
-  version "3.0.4"
-  sha256 "a77ad77d81d9b2e3576978fc0efcfa6a8f0473fa45d0ad203e301252ca977dd7"
+  version "3.3.4"
+  sha256 "1effe3f15d339a9bb97541888539076ee396dcccc57d73757ff814c88b5d0603"
 
-  url "https://repository.drovio.com/stable/drovio/macos/#{version.major}.x/#{version}/drovio.dmg"
+  url "https://repository.drovio.com/stable/drovio/macos_universal/#{version.major}.x/#{version}/drovio.dmg"
   name "Drovio"
   desc "Remote pair programming and team collaboration tool"
   homepage "https://www.drovio.com/"
 
   livecheck do
-    url "https://repository.drovio.com/stable/drovio/macos/latest_version/release.json"
-    strategy :page_match
-    regex(/"version"\s*:\s*"(\d+(?:\.\d+)*)"/i)
+    url "https://repository.drovio.com/stable/drovio/macos_universal/latest_version/release.json"
+    regex(/"version"\s*:\s*"(\d+(?:\.\d+)+)"/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
   app "Drovio.app"
 

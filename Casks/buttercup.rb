@@ -1,6 +1,6 @@
 cask "buttercup" do
-  version "2.3.0"
-  sha256 "d2bed34b11a009f69bce325d275266e4a4b12c9f8521f455ae6927c72cc27da2"
+  version "2.17.0"
+  sha256 "797a6fb6bca07ddc1b5f15513ee8ad57d9ddf74cb8003c5fe1dc306b34cc3a6d"
 
   url "https://github.com/buttercup/buttercup-desktop/releases/download/v#{version}/Buttercup-mac-x64-#{version}.dmg",
       verified: "github.com/buttercup/buttercup-desktop/"
@@ -13,5 +13,16 @@ cask "buttercup" do
     strategy :github_latest
   end
 
+  auto_updates true
+
   app "Buttercup.app"
+
+  zap trash: [
+    "~/Library/Application Support/Buttercup",
+    "~/Library/Application Support/Buttercup-nodejs",
+    "~/Library/Logs/Buttercup-nodejs",
+    "~/Library/Preferences/Buttercup-nodejs",
+    "~/Library/Preferences/pw.buttercup.desktop.plist",
+    "~/Library/Saved Application State/pw.buttercup.desktop.savedState",
+  ]
 end

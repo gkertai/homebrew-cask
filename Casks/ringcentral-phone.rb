@@ -1,6 +1,6 @@
 cask "ringcentral-phone" do
-  version "21.1.0"
-  sha256 "429ea7f565814ca54cb3d6e0a6630cbe0fca2e762db698134eaff49da1271aae"
+  version "22.4.0"
+  sha256 "78c737f96db5649765e468a413457154bd6c4d8da8b6486c80ecbb6e394f52e6"
 
   url "https://downloads.ringcentral.com/sp/RingCentral-Phone-#{version}.dmg"
   name "RingCentral Phone"

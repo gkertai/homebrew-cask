@@ -1,14 +1,24 @@
 cask "nightowl" do
-  version "0.3.0,13"
+  version "0.3.2,16"
   sha256 :no_check
 
-  url "https://nightowl.kramser.xyz/files/NightOwl.dmg"
-  appcast "https://nightowl.kramser.xyz/"
+  url "https://nightowlapp.co/files/NightOwl.dmg"
   name "NightOwl"
   desc "Utility to toggle dark mode"
-  homepage "https://nightowl.kramser.xyz/"
+  homepage "https://nightowlapp.co/"
 
+  livecheck do
+    url :url
+    strategy :extract_plist
+  end
+
+  auto_updates true
   depends_on macos: ">= :mojave"
 
   app "NightOwl.app"
+
+  zap trash: [
+    "~/Library/Caches/com.fuekiin.NightOwl",
+    "~/Library/Preferences/com.fuekiin.NightOwl.plist",
+  ]
 end

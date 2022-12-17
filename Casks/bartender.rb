@@ -1,21 +1,9 @@
 cask "bartender" do
-  if MacOS.version <= :el_capitan
-    version "2.1.6"
-    sha256 "013bb1f5dcc29ff1ecbc341da96b6e399dc3c85fc95bd8c7bee153ab0d8756f5"
-    url "https://macbartender.com/B2/updates/#{version.dots_to_hyphens}/Bartender%20#{version.major}.zip",
-        referer: "https://www.macbartender.com"
-  elsif MacOS.version <= :catalina
-    version "3.1.25,31125"
-    sha256 "bd31aa2aab3262ed08f5c421d504b82893b5dfc546f37fc98eae23bc47494c8a"
-    url "https://macbartender.com/B2/updates/#{version.before_comma.dots_to_hyphens}/Bartender%20#{version.major}.zip",
-        referer: "https://www.macbartender.com"
-  else
-    version "4.0.48,40048"
-    sha256 "677a8130f274b4f95f9f4e5be44d512f5e25daae3ffb5d06e616fe112024bef5"
-    url "https://macbartender.com/B2/updates/B4Latest/Bartender%20#{version.major}.dmg",
-        referer: "https://www.macbartender.com"
-  end
+  version "4.2.21,42021"
+  sha256 "28be16cbc69d1a2626c5a0e4846263c286d4e6cce95b68fb39b807ca9d360e8c"
 
+  url "https://macbartender.com/B2/updates/#{version.csv.first.major}-#{version.csv.first.minor}-#{version.csv.first.patch.rjust(1, "0")}/Bartender%20#{version.major}.dmg",
+      referer: "https://www.macbartender.com"
   name "Bartender"
   desc "Menu bar icon organizer"
   homepage "https://www.macbartender.com/"
@@ -26,15 +14,16 @@ cask "bartender" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Bartender #{version.major}.app"
 
   uninstall delete:    [
-    "/Library/Audio/Plug-Ins/HAL/BartenderAudioPlugIn.plugin",
-    "/Library/PrivilegedHelperTools/com.surteesstudios.Bartender.BartenderInstallHelper",
-    "/Library/ScriptingAdditions/BartenderHelper.osax",
-    "/System/Library/ScriptingAdditions/BartenderSystemHelper.osax",
-  ],
+              "/Library/Audio/Plug-Ins/HAL/BartenderAudioPlugIn.plugin",
+              "/Library/PrivilegedHelperTools/com.surteesstudios.Bartender.BartenderInstallHelper",
+              "/Library/ScriptingAdditions/BartenderHelper.osax",
+              "/System/Library/ScriptingAdditions/BartenderSystemHelper.osax",
+            ],
             launchctl: "com.surteesstudios.Bartender.BartenderInstallHelper",
             quit:      "com.surteesstudios.Bartender"
 

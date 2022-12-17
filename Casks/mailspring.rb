@@ -1,6 +1,6 @@
 cask "mailspring" do
-  version "1.9.1"
-  sha256 "04bd8a61d107642d68fe5bcfd1622624eee60cce3d6e0f60f08107569a96d813"
+  version "1.10.7"
+  sha256 "1b106e2afb6963174a5e625abbbc48d3d62a20320d98647a153ee907f8273e7e"
 
   url "https://github.com/Foundry376/Mailspring/releases/download/#{version}/Mailspring.zip",
       verified: "github.com/Foundry376/Mailspring/"
@@ -14,9 +14,9 @@ cask "mailspring" do
 
   zap trash: [
     "~/Library/Application Support/Mailspring",
-    "~/Library/Preferences/com.mailspring.*",
     "~/Library/Caches/com.mailspring.*",
-    "~/Library/Saved Application State/com.mailspring.*",
     "~/Library/Logs/Mailspring",
+    "~/Library/Preferences/com.mailspring.*",
+    "~/Library/Saved Application State/com.mailspring.*",
   ]
 end

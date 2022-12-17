@@ -1,22 +1,20 @@
 cask "anydo" do
-  version "4.2.146"
-  sha256 "47eb8c444be8558ba9da2b1f7e72425bcfb666a610059a991d57316f8da3fb16"
+  version "5.0.14"
+  sha256 "19c63fdcef987535acfb90142991a9abe22f8020f857ce265acb7e553aa0d377"
 
-  url "https://electron-app.any.do/Any.do-#{version}.dmg"
+  url "https://electron-app.any.do/Anydo-#{version}.dmg"
   name "Any.do"
   desc "Reminder, planner & calendar"
   homepage "https://www.any.do/"
 
   livecheck do
     url "https://electron-app.any.do/latest-mac.yml"
-    strategy :page_match do |page|
-      YAML.safe_load(page)["version"]
-    end
+    strategy :electron_builder
   end
 
   depends_on macos: ">= :catalina"
 
-  app "Any.do.app"
+  app "Anydo.app"
 
   zap trash: [
     "~/Library/Application Support/@anydo",

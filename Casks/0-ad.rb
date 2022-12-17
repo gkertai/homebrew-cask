@@ -1,15 +1,11 @@
 cask "0-ad" do
-  if MacOS.version <= :el_capitan
-    version "0.0.23b-alpha"
-    sha256 "5fae1331bb1778bf16e49460fb850270b6cd76bee6483078ff27582e71ab263f"
-    app "0 A.D.app"
-  else
-    version "0.0.24b-alpha"
-    sha256 "483bfdff249ff93435a4638631b47b4037b43e44719ba2efdc10f7f76771fc33"
-    app "0 A.D..app"
-  end
+  arch arm: "osx-aarch64", intel: "osx64"
 
-  url "https://releases.wildfiregames.com/0ad-#{version}-osx64.dmg",
+  version "0.0.26-alpha"
+  sha256 arm:   "3ef9a974ffa6f32577ba54f73b34a9d81a3798781fd8e30ea836626e3fdd3ac5",
+         intel: "f8f0f9237d33f3b2acabc1d5b50ee6da32768231d5610a2ff52d1e65df76bf2c"
+
+  url "https://releases.wildfiregames.com/0ad-#{version}-#{arch}.dmg",
       verified: "releases.wildfiregames.com/"
   name "0 A.D."
   desc "Real-time strategy game"
@@ -19,4 +15,10 @@ cask "0-ad" do
     url "https://play0ad.com/download/mac/"
     regex(/href=.*?0ad[._-]v?(.*?)-osx64\.dmg/i)
   end
+
+  depends_on macos: ">= :sierra"
+
+  app "0 A.D..app"
+
+  zap trash: "~/Library/Saved Application State/com.wildfiregames.0ad.savedState"
 end

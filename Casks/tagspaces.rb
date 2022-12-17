@@ -1,8 +1,11 @@
 cask "tagspaces" do
-  version "3.9.8"
-  sha256 "2a6901d85a3880cfad7525a01490c769fa7ee6d1d36d8a41de63188c30c8f215"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/tagspaces/tagspaces/releases/download/v#{version}/tagspaces-mac-#{version}.zip",
+  version "5.1.3"
+  sha256 arm:   "2057b41698cc2a436773f8cb17e72f4887a743c6ab79e2816c4227fd17f85239",
+         intel: "9956d651c8e511eadadb556da3fbf752097984430f822099660d52f661b81bc2"
+
+  url "https://github.com/tagspaces/tagspaces/releases/download/v#{version}/tagspaces-mac-#{arch}-#{version}.dmg",
       verified: "github.com/tagspaces/tagspaces/"
   name "TagSpaces"
   desc "Offline, open-source, document manager with tagging support"

@@ -1,14 +1,11 @@
 cask "phpstorm" do
-  version "2021.1.2,211.7142.44"
+  arch arm: "-aarch64"
 
-  if Hardware::CPU.intel?
-    sha256 "f6371a659691c1ff58f6c81946207b1acd99539b89be3147c777130b4153c2df"
-    url "https://download.jetbrains.com/webide/PhpStorm-#{version.before_comma}.dmg"
-  else
-    sha256 "b245a58612c0917235c108172a4e55c29ab89907a00522d696c32d3b81177201"
-    url "https://download.jetbrains.com/webide/PhpStorm-#{version.before_comma}-aarch64.dmg"
-  end
+  version "2022.3,223.7571.212"
+  sha256 arm:   "4c2810b793ef797e8fe6c74b1a9fa88a80d08b67441ac8a66dbd0fc85158c435",
+         intel: "f37697f26f3f85390929422c4a70ac72358f16ef044d9042c48d99357f092629"
 
+  url "https://download.jetbrains.com/webide/PhpStorm-#{version.csv.first}#{arch}.dmg"
   name "JetBrains PhpStorm"
   desc "PHP IDE by JetBrains"
   homepage "https://www.jetbrains.com/phpstorm/"
@@ -16,19 +13,20 @@ cask "phpstorm" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=PS&latest=true&type=release"
     strategy :page_match do |page|
-      version = page.match(/"version":"(\d+(?:\.\d+)*)/i)
-      build = page.match(/"build":"(\d+(?:\.\d+)*)/i)
-      "#{version[1]},#{build[1]}"
+      JSON.parse(page)["PS"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "PhpStorm.app"
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "pstorm") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end
@@ -39,7 +37,7 @@ cask "phpstorm" do
     "~/Library/Application Support/PhpStorm#{version.major_minor}",
     "~/Library/Caches/PhpStorm#{version.major_minor}",
     "~/Library/Logs/PhpStorm#{version.major_minor}",
-    "~/Library/Preferences/PhpStorm#{version.major_minor}",
     "~/Library/Preferences/jetbrains.phpstorm.*.plist",
+    "~/Library/Preferences/PhpStorm#{version.major_minor}",
   ]
 end

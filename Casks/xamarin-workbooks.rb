@@ -4,8 +4,6 @@ cask "xamarin-workbooks" do
 
   url "https://github.com/Microsoft/workbooks/releases/download/v#{version}/XamarinInteractive-#{version}.pkg",
       verified: "github.com/Microsoft/workbooks/"
-  appcast "https://docs.microsoft.com/en-us/xamarin/tools/inspector/release-notes/",
-          must_contain: version.chomp(".0")
   name "Xamarin Workbooks"
   desc "C# documentation and coding materials"
   homepage "https://docs.microsoft.com/en-us/xamarin/tools/workbooks/"
@@ -15,4 +13,8 @@ cask "xamarin-workbooks" do
   pkg "XamarinInteractive-#{version}.pkg"
 
   uninstall pkgutil: "com.xamarin.Inspector"
+
+  caveats do
+    discontinued
+  end
 end

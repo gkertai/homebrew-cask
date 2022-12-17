@@ -1,8 +1,8 @@
 cask "imazing" do
-  version "2.13.8,14897"
-  sha256 "1fec93e81af3a449df26b3319107eefcea63945fd2770a3f8bf4693abd621464"
+  version "2.16.4,16839"
+  sha256 "f18a860a0b111b6ec4894dee18f48c38bf055da8cc35d773563bf95cbd1d4d11"
 
-  url "https://downloads.imazing.com/mac/iMazing/#{version.before_comma}.#{version.after_comma}/iMazing_#{version.before_comma}.#{version.after_comma}.dmg"
+  url "https://downloads.imazing.com/mac/iMazing/#{version.csv.first}.#{version.csv.second}/iMazing_#{version.csv.first}.#{version.csv.second}.dmg"
   name "iMazing"
   desc "iPhone management application"
   homepage "https://imazing.com/"
@@ -18,8 +18,8 @@ cask "imazing" do
 
   uninstall login_item: "iMazing Mini",
             quit:       [
-              "com.DigiDNA.iMazing#{version.before_comma}.#{version.after_comma}Mac",
-              "com.DigiDNA.iMazing#{version.before_comma}.#{version.after_comma}Mac.Mini",
+              "com.DigiDNA.iMazing#{version.csv.first}.#{version.csv.second}Mac",
+              "com.DigiDNA.iMazing#{version.csv.first}.#{version.csv.second}Mac.Mini",
             ]
 
   zap trash: [

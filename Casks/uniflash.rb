@@ -1,15 +1,15 @@
 cask "uniflash" do
-  version "6.2.0.3059"
-  sha256 "8c43684e3ab3e1ef1202503c3eb6dfc34139432568c6294cbc77002f3175fbc2"
+  version "8.1.1.4146"
+  sha256 "723c810548da724a60e85aa218354cde2144b3271a7e91e77e3a94230c11e603"
 
-  url "https://downloads.ti.com/ccs/esd/uniflash/uniflash_sl.#{version}.dmg"
+  url "https://dr-download.ti.com/software-development/software-programming-tool/MD-QeJBJLj8gq/#{version.major_minor_patch}/uniflash_sl.#{version}.dmg"
   name "TI UniFlash"
   desc "Flash tool for microcontrollers"
   homepage "https://www.ti.com/tool/UNIFLASH"
 
   livecheck do
     url :homepage
-    regex(%r{href=.*?/uniflash_sl\.(\d+(?:\.\d+)*)\.dmg}i)
+    regex(/href=.*?uniflash_sl\.(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   installer script: {
@@ -21,7 +21,7 @@ cask "uniflash" do
   binary shimscript
 
   preflight do
-    IO.write shimscript, <<~EOS
+    File.write shimscript, <<~EOS
       #!/bin/sh
       exec '/Applications/TI/UniFlash/dslite.sh' "$@"
     EOS

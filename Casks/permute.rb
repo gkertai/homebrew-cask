@@ -1,19 +1,19 @@
 cask "permute" do
-  version "3.6.3,2417"
-  sha256 "614753e3a80535c8b64f04460dc051abc311ac3651c80028540509281afff852"
+  version "3.9.13,2644"
+  sha256 "50b083d94926da18b74491fa5e9aaf523a35755e13c5a8e6990c6b2166604694"
 
-  url "https://trial.charliemonroe.net/permute/v#{version.major}/Permute_#{version.major}_#{version.after_comma}.dmg"
+  url "https://software.charliemonroe.net/trial/permute/v#{version.major}/Permute_#{version.major}_#{version.csv.second}.dmg"
   name "Permute"
   desc "Converts and edits video, audio or image files"
-  homepage "https://software.charliemonroe.net/permute.php"
+  homepage "https://software.charliemonroe.net/permute/"
 
   livecheck do
-    url "https://trial.charliemonroe.net/permute/updates_#{version.major}.xml"
+    url "https://software.charliemonroe.net/trial/permute/v#{version.major}/updates.xml"
     strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :high_sierra"
 
   app "Permute #{version.major}.app"
 

@@ -1,5 +1,5 @@
 cask "faxbot" do
-  version "2.6.1,210416.1"
+  version "2.6.2,210621.1"
   sha256 :no_check
 
   url "https://www.hosy.de/faxer/Faxer.zip"
@@ -13,6 +13,8 @@ cask "faxbot" do
       "#{item.title[/Version (\d+(?:\.\d+)*)/i, 1]},#{item.version}"
     end
   end
+
+  depends_on macos: ">= :sierra"
 
   app "Faxbot.app"
 

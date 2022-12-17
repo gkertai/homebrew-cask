@@ -1,6 +1,6 @@
 cask "remote-desktop-manager-free" do
-  version "2021.1.3.0"
-  sha256 "695287cf5b3358c82cd8ad0782f4f48ef7868991a122d71df448eb4129e015dd"
+  version "2022.2.16.0"
+  sha256 "26545b52627f780fc3618f62649ff58589adfd1409d72f5b84f50be11b218879"
 
   url "https://cdn.devolutions.net/download/Mac/Devolutions.RemoteDesktopManager.Free.Mac.#{version}.dmg",
       verified: "devolutions.net/"
@@ -12,6 +12,8 @@ cask "remote-desktop-manager-free" do
     url "https://cdn.devolutions.net/download/Mac/RemoteDesktopManagerFree.xml"
     strategy :sparkle
   end
+
+  depends_on macos: ">= :sierra"
 
   app "Remote Desktop Manager Free.app"
 

@@ -1,6 +1,6 @@
 cask "chatterino" do
-  version "2.3.1"
-  sha256 "0622d1c22bc95ad5ae35d329015afa35fc8ca3b0bb45d35dad19c64829ea7cb3"
+  version "2.4.0"
+  sha256 "801e06828cae0995e72f8ee849c2be4a9f9bb17c1cae8d2cb90b4fccf80fd7ea"
 
   url "https://chatterino.fra1.digitaloceanspaces.com/bin/#{version}/Chatterino.dmg",
       verified: "chatterino.fra1.digitaloceanspaces.com/"
@@ -10,7 +10,6 @@ cask "chatterino" do
 
   livecheck do
     url "https://notitia.chatterino.com/version/chatterino/macos/stable"
-    strategy :page_match
     regex(/"version"\s*:\s*"(\d+(?:\.\d+)*(-\w+\d+)?)"/i)
   end
 

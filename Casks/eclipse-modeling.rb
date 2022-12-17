@@ -1,20 +1,17 @@
 cask "eclipse-modeling" do
-  version "4.19.0,2021-03:R"
-  sha256 "404096e07470be36511d8d85bf0d2e43f309be9cab37c8a46cea2e20e4a9cdfb"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.after_comma.before_colon}/#{version.after_colon}/eclipse-modeling-#{version.after_comma.before_colon}-#{version.after_colon}-macosx-cocoa-x86_64.dmg&r=1"
+  version "4.26.0,2022-12"
+  sha256 arm:   "44dce5e6a6919cc78fdf279e008bc1a0fa9ba4eecb66751055fe9615e353cd72",
+         intel: "45e707082723e5fccecfc227f2326f0d1207437b35868947cd65988f0c6a61e8"
+
+  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.csv.second}/R/eclipse-modeling-#{version.csv.second}-R-macosx-cocoa-#{arch}.dmg&r=1"
   name "Eclipse Modeling Tools"
+  desc "Tools and runtimes for building model-based applications"
   homepage "https://eclipse.org/"
 
   livecheck do
-    url "https://www.eclipse.org/downloads/packages/"
-    strategy :page_match do |page|
-      page.scan(%r{href=.*?/downloads/packages/release/(\d+-\d+)}i).map do |release|
-        version_page = Net::HTTP.get(URI.parse("https://projects.eclipse.org/releases/#{release[0]}"))
-        version = version_page.scan(%r{href="/projects/eclipse/releases/(\d+(?:\.\d+)*)"}i)
-        "#{version[0][0]},#{release[0]}:R"
-      end
-    end
+    cask "eclipse-ide"
   end
 
   # Renamed to avoid conflict with other Eclipse.

@@ -1,11 +1,10 @@
 cask "kid3" do
   # NOTE: "3" is not a version number, but an intrinsic part of the product name (ID3 tags)
-  version "3.8.6"
-  sha256 "81bfcaa03af7308a7d59b93f9e1375f8057d403ab7a5c2729c9ed753cf565cf6"
+  version "3.9.2"
+  sha256 "f29bdd539c2cdfae0f5a4ee10e567a23f882c6eba6cae788a10ee4d9d6391b9b"
 
   url "https://downloads.sourceforge.net/kid3/kid3-#{version}-Darwin.dmg",
       verified: "downloads.sourceforge.net/kid3/"
-  appcast "https://sourceforge.net/p/kid3/news/feed.rss"
   name "Kid3"
   desc "Audio tagger focusing on efficiency"
   homepage "https://kid3.sourceforge.io/"

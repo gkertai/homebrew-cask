@@ -9,8 +9,7 @@ cask "duckietv" do
   homepage "https://schizoduckie.github.io/DuckieTV/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    skip "No reliable way to get version info"
   end
 
   pkg "DuckieTV-#{version}-OSX-x64.pkg"

@@ -1,6 +1,6 @@
 cask "nomachine-enterprise-client" do
-  version "7.4.1_1"
-  sha256 "ae50c6f4fc6feebe26d7e98e31d331b6063d1c0015681e4b67d1769459b3277f"
+  version "8.2.3_12"
+  sha256 "ffce21299f4a833b33d298578a77211cd38d67dde73c76fd73edbba040a10a52"
 
   url "https://download.nomachine.com/download/#{version.major_minor}/MacOSX/nomachine-enterprise-client_#{version}.dmg"
   name "NoMachine Enterprise Client"
@@ -8,9 +8,8 @@ cask "nomachine-enterprise-client" do
   homepage "https://www.nomachine.com/"
 
   livecheck do
-    url "https://www.nomachine.com/download/download&id=15"
-    strategy :page_match
-    regex(/nomachine-enterprise-client_(\d+(?:\.\d+)*_\d+)\.dmg/i)
+    url "https://nomachine.com/support&destination=downloads&callback=L2Rvd25sb2FkLz9pZD0xNi"
+    regex(/nomachine-enterprise-client[._-]v?(\d+(?:\.\d+)*_\d+)\.dmg/i)
   end
 
   pkg "NoMachine.pkg"
@@ -18,9 +17,13 @@ cask "nomachine-enterprise-client" do
   # A launchctl job ordinarily manages uninstall once the app bundle is removed
   # To ensure it ran, verify if /Library/Application Support/NoMachine/nxuninstall.sh no longer exists
   uninstall delete:    "/Applications/NoMachine.app",
-            pkgutil:   "com.nomachine.nomachine.NoMachine*.pkg",
+            pkgutil:   [
+              "com.nomachine.nomachine.NoMachine*.pkg",
+              "com.nomachine.*",
+            ],
+
             launchctl: [
               "com.nomachine.uninstall",
-              "com.nomachine.nxlaunchconf",
+              "com.nomachine.launchconf",
             ]
 end

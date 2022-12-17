@@ -1,6 +1,6 @@
 cask "onionshare" do
-  version "2.3.1"
-  sha256 "5de2cb81c87a13bc27cd71061c8c1a1f5dde25efe3e1f6b4ddb02ca0a343323f"
+  version "2.6"
+  sha256 "eb6cfd17003fbcbde9da49d7bfb18c9bd54ff901568c2f21af3b2482844982e1"
 
   url "https://onionshare.org/dist/#{version}/OnionShare-#{version}.dmg"
   name "OnionShare"
@@ -8,9 +8,15 @@ cask "onionshare" do
   homepage "https://onionshare.org/"
 
   livecheck do
-    url "https://onionshare.org/latest-version.txt"
-    regex(/(\d+(?:\.\d+)*)/)
+    url :homepage
+    regex(/href=.*?OnionShare[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   app "OnionShare.app"
+
+  zap trash: [
+    "~/Library/Application Support/OnionShare",
+    "~/Library/Preferences/org.onionshare.onionshare.plist",
+    "~/Library/Saved Application State/org.onionshare.onionshare.savedState",
+  ]
 end

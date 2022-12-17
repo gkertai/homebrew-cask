@@ -1,10 +1,11 @@
 cask "boinc" do
-  version "7.16.14"
-  sha256 "9a0eabad4b6780f56543c5634bfcef46728bd77f95f3d5e46cc35a0b6bdbdce1"
+  version "7.20.4"
+  sha256 "7434428fa4bba8b7d7103d7c937c5ea2291644d8e3eace60583d0ec2bc4ea59c"
 
   url "https://boinc.berkeley.edu/dl/boinc_#{version}_macOSX_universal.zip"
   name "Berkeley Open Infrastructure for Network Computing"
   name "BOINC"
+  desc "Downloads scientific computing jobs and runs them invisibly in the background"
   homepage "https://boinc.berkeley.edu/"
 
   livecheck do

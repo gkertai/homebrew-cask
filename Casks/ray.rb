@@ -1,24 +1,20 @@
 cask "ray" do
-  version "1.14.7"
+  arch arm: "-arm64"
+  folder = on_arch_conditional arm: "arm64/"
 
-  if Hardware::CPU.intel?
-    sha256 "799798cf31ff96924db32b14930fb8ab302e0ee16f084e2d388b378f4b13f708"
-    url "https://ray-app.s3.eu-west-1.amazonaws.com/Ray-#{version}.dmg",
-        verified: "ray-app.s3.eu-west-1.amazonaws.com/"
-  else
-    sha256 "f9ee5e0ffaf4ac00bef5d2d9c27b9cdd1210b9bf1d1d1a29419aa885f8c13749"
-    url "https://ray-app.s3.eu-west-1.amazonaws.com/arm64/Ray-#{version}-arm64.dmg",
-        verified: "ray-app.s3.eu-west-1.amazonaws.com/"
-  end
+  version "2.2.1"
+  sha256 arm:   "1bab7af1656ebce54e9ffb3ef29ecdb40405713a50ef11c3800fa50137efc24e",
+         intel: "420feaf8e0648012be7b8d0a78df96a6ad8f66dd7b6a08c85515d66ddb98d2da"
 
+  url "https://ray-app.s3.eu-west-1.amazonaws.com/#{folder}Ray-#{version}#{arch}.dmg",
+      verified: "ray-app.s3.eu-west-1.amazonaws.com/"
   name "Ray"
   desc "Debug with Ray to fix problems faster"
   homepage "https://myray.app/"
 
   livecheck do
     url "https://ray-app.s3.amazonaws.com/latest-mac.yml"
-    strategy :page_match
-    regex(/Ray-(\d+(?:\.\d+)*)-mac\.zip/i)
+    strategy :electron_builder
   end
 
   auto_updates true

@@ -1,9 +1,10 @@
 cask "hubstaff" do
-  version "1.5.17,2982"
-  sha256 "90d0791902d1aac8ea797f302e97aeae26110394cb702e207e2b70cd1448f55a"
+  version "1.6.9,4467"
+  sha256 "4206605007c6e06d0332c04df8da78c91f8b0ecdba74dcc13ae87de699c644bd"
 
-  url "https://app.hubstaff.com/download/#{version.after_comma}-mac-os-x-#{version.before_comma.dots_to_hyphens}-release"
+  url "https://app.hubstaff.com/download/#{version.csv.second}-mac-os-x-#{version.csv.first.dots_to_hyphens}-release"
   name "Hubstaff"
+  desc "Work time tracker"
   homepage "https://hubstaff.com/"
 
   livecheck do
@@ -14,4 +15,9 @@ cask "hubstaff" do
   end
 
   app "Hubstaff.app"
+
+  zap trash: [
+    "~/Library/Application Support/Hubstaff",
+    "~/Library/Preferences/com.netsoft.Hubstaff.plist",
+  ]
 end

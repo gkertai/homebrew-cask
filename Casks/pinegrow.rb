@@ -1,16 +1,26 @@
 cask "pinegrow" do
-  version "5.992"
-  sha256 "b4d932df613af141926cebb44fa5c54e0fe1ed0be95caa09026c555a0433a234"
+  arch arm: "ARM64", intel: "X64"
 
-  url "https://download.pinegrow.com/PinegrowMac.#{version}.dmg"
+  version "7.03"
+  sha256 arm:   "eac8d185d25c4cc85ac5b592f37df697f7b3bcf664870bcbd895bd72547db214",
+         intel: "b3c280999a86b4f342b0b4a9ade58bdef26870c15e42f87acffc0c95700a0cd3"
+
+  url "https://download.pinegrow.com/PinegrowMac#{arch}.#{version}.dmg"
   name "Pinegrow"
+  desc "Web editor"
   homepage "https://pinegrow.com/"
 
   livecheck do
-    url :homepage
-    strategy :page_match
-    regex(%r{href=.*?/PinegrowMac\.(\d+(?:\.\d+)*)\.dmg}i)
+    url "https://docs.pinegrow.com/wp-json/wp/v2/pages/1698"
+    regex(%r{href=.*?/PinegrowMac#{arch}[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   app "Pinegrow.app"
+
+  zap trash: [
+    "~/Library/Application Support/Pinegrow",
+    "~/Library/Caches/Pinegrow",
+    "~/Library/Preferences/com.pinegrow.pinegrow.plist",
+    "~/Library/Saved Application State/com.pinegrow.pinegrow.savedState",
+  ]
 end

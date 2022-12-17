@@ -1,6 +1,6 @@
 cask "blisk" do
-  version "14.0.71.69"
-  sha256 "8e400ced9331629e4da8da81f577fa8ac85254a341a29d631db735ec8d9745c2"
+  version "19.1.122.126"
+  sha256 "58ae5f2e61b4ea478bf8b8e2884ec14d537bb8f8618672a711e7fc8b6536b700"
 
   url "https://bliskcloudstorage.blob.core.windows.net/mac-installers/BliskInstaller_#{version}.dmg",
       verified: "bliskcloudstorage.blob.core.windows.net/"
@@ -10,8 +10,7 @@ cask "blisk" do
 
   livecheck do
     url "https://blisk.io/download/?os=mac"
-    strategy :page_match
-    regex(%r{href=.*?/BliskInstaller_(\d+(?:\.\d+)*)\.dmg}i)
+    regex(/href=.*?BliskInstaller[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   app "Blisk.app"

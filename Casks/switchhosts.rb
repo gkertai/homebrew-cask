@@ -1,25 +1,40 @@
 cask "switchhosts" do
-  version "4.0.0.6029"
+  arch arm: "arm64", intel: "x64"
 
-  if Hardware::CPU.intel?
-    sha256 "0745e449e15002e9afc3c326e1e78a165e761e00825fa02eef170c140a8e41db"
-    url "https://github.com/oldj/SwitchHosts/releases/download/v#{version.major_minor_patch}/SwitchHosts_#{version}.dmg",
-        verified: "github.com/oldj/SwitchHosts/"
-  else
-    sha256 "1f0cfe32b87f9133098604a68289db9f309af8374af9b9341b8d24393de354bf"
-    url "https://github.com/oldj/SwitchHosts/releases/download/v#{version.major_minor_patch}/SwitchHosts_arm64_#{version}.dmg",
-        verified: "github.com/oldj/SwitchHosts/"
-  end
+  version "4.1.2.6086"
+  sha256 arm:   "85c2918308c849c3f70de5436b0e597107e925283c925e7d9b69496c26f31466",
+         intel: "8a8556ca83496ffd965af493a139e84cec25c38e9f64eb26f1a134a621bc9ec3"
 
+  url "https://github.com/oldj/SwitchHosts/releases/download/v#{version.major_minor_patch}/SwitchHosts_mac_#{arch}_#{version}.dmg",
+      verified: "github.com/oldj/SwitchHosts/"
   name "SwitchHosts"
   desc "App to switch hosts"
   homepage "https://oldj.github.io/SwitchHosts/"
 
   livecheck do
-    url :url
-    strategy :github_latest
-    regex(%r{/SwitchHosts_(\d+(?:\.\d+)*)\.dmg}i)
+    url "https://github.com/oldj/SwitchHosts/releases/latest"
+    regex(%r{/SwitchHosts_mac_#{arch}[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
+    strategy :header_match do |headers, regex|
+      next if headers["location"].blank?
+
+      # Identify the latest tag from the response's `location` header
+      latest_tag = File.basename(headers["location"])
+      next if latest_tag.blank?
+
+      # Fetch the assets list HTML for the latest tag and match within it
+      assets_page = Homebrew::Livecheck::Strategy.page_content(
+        @url.sub(%r{/releases/?.+}, "/releases/expanded_assets/#{latest_tag}"),
+      )
+      assets_page[:content]&.scan(regex)&.map { |match| match[0] }
+    end
   end
 
   app "SwitchHosts.app"
+
+  zap trash: [
+    "~/Library/Application Support/SwitchHosts",
+    "~/Library/Preferences/SwitchHosts.plist",
+    "~/Library/Saved Application State/SwitchHosts.savedState",
+    "~/.SwitchHosts",
+  ]
 end

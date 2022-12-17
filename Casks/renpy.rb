@@ -1,11 +1,16 @@
 cask "renpy" do
-  version "7.4.4"
-  sha256 "b06491573cb59d2fd0c511c550ddb82b22a78a0ef34680370f280d47ff9683a6"
+  version "8.0.3"
+  sha256 "29a4fb79f37fdb68ac889ed3939788a715130c451b969d9dbc06d276e79f7d8f"
 
   url "https://www.renpy.org/dl/#{version}/renpy-#{version}-sdk.zip"
   name "Ren'Py"
   desc "Visual novel engine in Python"
   homepage "https://www.renpy.org/"
+
+  livecheck do
+    url "https://www.renpy.org/latest.html"
+    regex(/href=.*?renpy[._-]v?(\d+(?:\.\d+)+)[._-]sdk\.dmg/i)
+  end
 
   suite "renpy-#{version}-sdk"
 end

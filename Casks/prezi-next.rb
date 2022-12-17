@@ -1,15 +1,18 @@
 cask "prezi-next" do
-  version "1.50.0,26964"
-  sha256 "ea6c8e9ed792c7f526a988592eb9721ace497cca91666da5e025ad9535963918"
+  version "1.59.0,27276"
+  sha256 "1bbdf99a92b8d8ffa752c40900f7d0c90ae4e6001da76794db8140ce3d5b93fd"
 
-  url "https://desktopassets.prezi.com/mac/pitch/releases/Prezi_Next_#{version.before_comma}.dmg"
+  url "https://desktopassets.prezi.com/mac/pitch/releases/Prezi_Next_#{version.csv.first}.dmg"
   name "Prezi Next"
+  desc "Presentation software"
   homepage "https://prezi.com/"
 
   livecheck do
     url "https://prezidesktop.s3.amazonaws.com/assets/mac/pitch/updates/prezi-business.xml"
     strategy :sparkle
   end
+
+  depends_on macos: ">= :el_capitan"
 
   app "Prezi Next.app"
 end

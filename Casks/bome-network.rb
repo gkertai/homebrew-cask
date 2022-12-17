@@ -1,6 +1,6 @@
 cask "bome-network" do
-  version "1.2.1"
-  sha256 "be2549d8ad526f0e08ef136edf785005840ad3c554de68583788f89714744d5c"
+  version "1.5.0"
+  sha256 "baa91064e83f144feb5501f7e24dad7bbb7cc8969987f6286662387e06bed11d"
 
   url "https://download.bome.com/BomeNet#{version}.dmg"
   name "Bome Network"
@@ -9,8 +9,7 @@ cask "bome-network" do
 
   livecheck do
     url "https://www.bome.com/products/bomenet#downloads"
-    strategy :page_match
-    regex(%r{href=.*?/BomeNet(\d+(?:\.\d+)*)\.dmg}i)
+    regex(%r{href=.*?/BomeNet(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   app "Bome Network.app"

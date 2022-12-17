@@ -1,28 +1,31 @@
 cask "calmly-writer" do
-  version "2.0.26"
+  arch arm: "arm64", intel: "x64"
 
-  if Hardware::CPU.intel?
-    sha256 "5cf3e92fa5fc2fc0399a5cf77eb44be7c115fbce160924e3ea431012d44b1e26"
+  version "2.0.50"
 
-    url "https://www.calmlywriter.com/releases/x64/Calmly%20Writer-#{version}.pkg"
-  else
-    sha256 "0a39fdc3e990e2ea6ffcb61742b93da46b67f4e49fe6bf88e402fe1a362e5bae"
-
-    url "https://www.calmlywriter.com/releases/arm64/Calmly%20Writer-#{version}.pkg"
+  on_intel do
+    sha256 "843782d181acfde85f9137b5640a184ae23d5d072b115c0fdf31b3fe5ab0c1bc"
+    url "https://www.calmlywriter.com/releases/Calmly%20Writer-#{version}.dmg"
+  end
+  on_arm do
+    sha256 "9688a991c0eeb42b472863f18ca3aaf9aa7d954bbc557a3cd3829b6807692450"
+    url "https://www.calmlywriter.com/releases/Calmly%20Writer-#{version}-#{arch}.dmg"
   end
 
   name "Calmly Writer"
-  desc "Simple word processor with markdown formatting and select themes"
+  desc "Word processor with markdown formatting and select themes"
   homepage "https://calmlywriter.com/"
 
   livecheck do
-    url "https://calmlywriter.com/releases/x64/download.php"
-    strategy :header_match
+    url "https://calmlywriter.com/releases/#{arch}/download.php"
+    strategy :header_match do |headers|
+      headers["location"][/Calmly(?:\s|%20)Writer[._-]v?(\d+(?:\.\d+)+)/i, 1]
+    end
   end
 
-  pkg "Calmly Writer-#{version}.pkg"
+  depends_on macos: ">= :sierra"
 
-  uninstall pkgutil: "calmlywriter"
+  app "Calmly Writer.app"
 
   zap trash: [
     "~/Library/Preferences/calmlywriter.plist",

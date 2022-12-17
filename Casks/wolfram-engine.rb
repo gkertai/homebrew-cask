@@ -1,20 +1,26 @@
 cask "wolfram-engine" do
-  version "12.2.0.0"
-  sha256 "5b3e10720b2e0a87cfb8732393c893a7b2efaad172ce50a35ef348603f0a010c"
+  version "13.1.0.0"
+  sha256 "f7595e229b9c9883d7d1a5cf27237794567ad89b7b884afee2857e9853f40ce9"
 
   url "https://files.wolframcdn.com/packages/Homebrew/#{version}/WolframEngine_#{version.major_minor_patch}_MAC.dmg",
-      verified: "files.wolframcdn.com/packages/"
+      verified: "files.wolframcdn.com/packages/Homebrew/"
   name "Wolfram Engine"
   desc "Evaluator for the Wolfram Language"
   homepage "https://www.wolfram.com/engine/"
 
-  depends_on macos: ">= :sierra"
+  livecheck do
+    url "https://files.wolframcdn.com/packages/Homebrew/latest.txt"
+    regex(/^(\d+(?:\.\d+)+)$/)
+  end
+
+  depends_on macos: ">= :mojave"
 
   app "Wolfram Engine.app"
+  binary "#{appdir}/Wolfram Engine.app/Contents/Resources/Wolfram Player.app/Contents/MacOS/wolframscript"
 
   zap trash: [
-    "~/Library/WolframEngine",
     "~/Library/Caches/Wolfram",
+    "~/Library/WolframEngine",
   ]
 
   caveats do

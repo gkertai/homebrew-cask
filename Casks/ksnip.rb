@@ -1,9 +1,10 @@
 cask "ksnip" do
-  version "1.8.2"
-  sha256 "635d454aa13e697885dff46b65ec73a0b05c91bc6d3a5091c74d9bad9187ec09"
+  version "1.10.0"
+  sha256 "50db49f03b3177053238fb553e632e66cc3edabae7c1d45a2124acbef5e7a81a"
 
   url "https://github.com/ksnip/ksnip/releases/download/v#{version}/ksnip-#{version}.dmg"
   name "ksnip"
+  desc "Screenshot and annotation tool"
   homepage "https://github.com/ksnip/ksnip"
 
   app "ksnip.app"

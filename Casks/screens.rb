@@ -1,8 +1,8 @@
 cask "screens" do
-  version "4.8.6,1617724297"
-  sha256 "b5bdaff99750d230b545d4987c8ddd3d575f85b8599bd50277b45efcb072a403"
+  version "4.12.6,1670265969"
+  sha256 "639bb164a4a57823fe013129f72dcb914ad21a16f38b1c886b8ebbbef4471abe"
 
-  url "https://updates.edovia.com/com.edovia.screens#{version.major}.mac/Screens_#{version.before_comma}b#{version.after_comma}.zip"
+  url "https://updates.edovia.com/com.edovia.screens#{version.major}.mac/Screens_#{version.csv.first}b#{version.csv.second}.zip"
   name "Screens"
   desc "Remote access software focusing on usability"
   homepage "https://edovia.com/screens-mac/"
@@ -13,7 +13,7 @@ cask "screens" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :high_sierra"
 
   app "Screens #{version.major}.app"
 
@@ -25,6 +25,7 @@ cask "screens" do
     "~/Library/Application Scripts/com.edovia.screens.launcher",
     "~/Library/Containers/com.edovia.screens#{version.major}.mac",
     "~/Library/Containers/com.edovia.screens.launcher",
+    "~/Library/Preferences/com.edovia.screens#{version.major}.mac.plist",
     "~/Library/Logs/Screens",
   ]
 end

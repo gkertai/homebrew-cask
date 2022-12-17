@@ -1,20 +1,21 @@
 cask "telegram-desktop" do
-  version "2.7.4"
-  sha256 "3821b17d20ac49efe6ad3d669834a6575958f3b0bc86a1eea3341974d7aa19a3"
+  version "4.4.1"
+  sha256 "3bdd867cb7ef392a26320020d83dea2b1c2eeef7b926854b5ec0c6d47e3cc70b"
 
-  url "https://github.com/telegramdesktop/tdesktop/releases/download/v#{version}/tsetup.#{version}.dmg",
-      verified: "github.com/telegramdesktop/tdesktop/"
+  url "https://updates.tdesktop.com/tmac/tsetup.#{version}.dmg",
+      verified: "updates.tdesktop.com/tmac/"
   name "Telegram Desktop"
   desc "Desktop client for Telegram messenger"
   homepage "https://desktop.telegram.org/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://telegram.org/dl/desktop/mac"
+    strategy :header_match
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/telegram-desktop-dev"
+  conflicts_with cask: "homebrew/cask-versions/telegram-desktop-beta"
+  depends_on macos: ">= :sierra"
 
   # Renamed to avoid conflict with telegram
   app "Telegram.app", target: "Telegram Desktop.app"

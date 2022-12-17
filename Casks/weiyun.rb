@@ -1,12 +1,17 @@
 cask "weiyun" do
-  version "3.0.6.409_0"
-  sha256 "c723d0f872dbcb74fc745a8dafeb9701adb3ef28b495595082a18bf9139efadd"
+  version "5.2.1282"
+  sha256 "ea51cd3c356380f12a2c5c26795480ebbd19bac1021d9922e976f68460e84be5"
 
-  url "https://dldir1.qq.com/weiyun/Weiyun_Mac_#{version}.dmg",
+  url "https://dldir1.qq.com/weiyun/electron-update/release/mac/Weiyun-mac-x64-#{version}.dmg",
       verified: "dldir1.qq.com/weiyun/"
-  appcast "https://qzonestyle.gtimg.cn/qzone/qzactStatics/configSystem/data/65/config1.js"
-  name "weiyun"
+  name "Weiyun"
+  desc "Document backup and online management"
   homepage "https://www.weiyun.com/"
+
+  livecheck do
+    url "https://jsonschema.qpic.cn/2993ffb0f5d89de287319113301f3fca/179b0d35c9b088e5e72862a680864254/config"
+    regex(/Weiyun[._-]mac[._-]x64[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+  end
 
   app "Weiyun.app"
 

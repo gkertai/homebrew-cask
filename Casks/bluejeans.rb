@@ -1,6 +1,6 @@
 cask "bluejeans" do
-  version "2.28.0.344"
-  sha256 "e8859047c99b3c48078f1ce07caa5211c77940b901b71d2fb7a6fad2920a38b3"
+  version "2.40.0.178"
+  sha256 "5da8a442911127a4f7d5e0cf35fc78039b14e2c0c326617f91b8e27079d34488"
 
   url "https://swdl.bluejeans.com/desktop-app/mac/#{version.major_minor_patch}/#{version}/BlueJeansInstaller.pkg"
   name "BlueJeans"
@@ -17,5 +17,13 @@ cask "bluejeans" do
   uninstall pkgutil: [
     "com.bluejeansnet.blue.pkg",
     "com.tatvikmohit.BlueJeans-Audio",
+  ]
+
+  zap trash: [
+    "~/Library/Application Support/com.bluejeansnet.Blue",
+    "~/Library/Caches/com.bluejeansnet.Blue",
+    "~/Library/LaunchAgents/com.bluejeansnet.BlueJeansHelper.plist",
+    "~/Library/Logs/BlueJeans",
+    "~/Library/Preferences/com.bluejeansnet.Blue.plist",
   ]
 end

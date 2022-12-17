@@ -1,6 +1,6 @@
 cask "radicle-upstream" do
-  version "0.2.4"
-  sha256 "9b8f94ba43f086718cb9633011492a322cdb94141456d8e77468d578c85fbb19"
+  version "0.3.2"
+  sha256 "d52d9c101c4c59fb414ef736c49e5f751ee1be5b407d3bf26e097bb01ffca29d"
 
   url "https://releases.radicle.xyz/radicle-upstream-#{version}.dmg"
   name "Radicle Upstream"
@@ -9,7 +9,6 @@ cask "radicle-upstream" do
 
   livecheck do
     url "https://github.com/radicle-dev/radicle-upstream"
-    strategy :git
   end
 
   depends_on macos: ">= :mojave"

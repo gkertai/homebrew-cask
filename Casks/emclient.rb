@@ -1,6 +1,6 @@
 cask "emclient" do
-  version "8.1.1083"
-  sha256 "620000b546d6e6be16a5f194f8f49582e3592673041771624e6e0a17051d5728"
+  version "9.2.1222"
+  sha256 "60c820628bd5e29312c84997aa4c79132c1338f881086d743508191314ff2d8d"
 
   url "https://cdn-dist.emclient.com/dist/v#{version}_Mac/setup.pkg"
   name "eM Client"
@@ -10,7 +10,7 @@ cask "emclient" do
   livecheck do
     url "https://www.emclient.com/dist/latest/setup.pkg"
     strategy :header_match do |headers|
-      headers["location"][/v(\d+(?:\.\d+)*)_Mac/i, 1]
+      headers["location"][/v?(\d+(?:\.\d+)+)_Mac/i, 1]
     end
   end
 
@@ -18,7 +18,8 @@ cask "emclient" do
 
   pkg "setup.pkg"
 
-  uninstall pkgutil: "com.emclient.mail.client.pkg"
+  uninstall delete:  "/Applications/eM Client.app",
+            pkgutil: "com.emclient.mail.client.pkg"
 
   zap trash: [
     "~/Library/Caches/com.emclient.mail.client",

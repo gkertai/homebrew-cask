@@ -1,20 +1,17 @@
 cask "eclipse-cpp" do
-  version "4.19.0,2021-03:R"
-  sha256 "4eb035478fb52c1ae3ae26322dc9ec0967a18155283fb44afebee5f12189893a"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.after_comma.before_colon}/#{version.after_colon}/eclipse-cpp-#{version.after_comma.before_colon}-#{version.after_colon}-macosx-cocoa-x86_64.dmg&r=1"
+  version "4.26.0,2022-12"
+  sha256 arm:   "7a1d03ac3b19ddd37d26bb5c19b78ec77b4d7dc9a09328ce61750a3e05520054",
+         intel: "3acd84accb2e913e478698d2f84e2ddee88dbb4c6a00e4ca9727cb38c3019e6e"
+
+  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.csv.second}/R/eclipse-cpp-#{version.csv.second}-R-macosx-cocoa-#{arch}.dmg&r=1"
   name "Eclipse IDE for C/C++ Developers"
+  desc "Eclipse IDE for C and C++ developers"
   homepage "https://eclipse.org/"
 
   livecheck do
-    url "https://www.eclipse.org/downloads/packages/"
-    strategy :page_match do |page|
-      page.scan(%r{href=.*?/downloads/packages/release/(\d+-\d+)}i).map do |release|
-        version_page = Net::HTTP.get(URI.parse("https://projects.eclipse.org/releases/#{release[0]}"))
-        version = version_page.scan(%r{href="/projects/eclipse/releases/(\d+(?:\.\d+)*)"}i)
-        "#{version[0][0]},#{release[0]}:R"
-      end
-    end
+    cask "eclipse-ide"
   end
 
   # Renamed to avoid conflict with other Eclipse.

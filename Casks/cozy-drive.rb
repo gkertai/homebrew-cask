@@ -1,16 +1,19 @@
 cask "cozy-drive" do
-  version "3.27.0"
-  sha256 "f197b068256c3faf79d369e87eb8145737d12438455d266aaeb0015a1b0dda3d"
+  version "3.36.1"
+  sha256 "c59213d465b9a03a1bc66f392343c980703a9dc1c8d945afc582f1b30994e5b8"
 
-  url "https://nuts.cozycloud.cc/download/channel/stable/CozyDrive-#{version}.dmg",
-      verified: "nuts.cozycloud.cc/"
+  url "https://github.com/cozy-labs/cozy-desktop/releases/download/v#{version}/Cozy-Drive-#{version}.dmg",
+      verified: "github.com/cozy-labs/cozy-desktop"
   name "Cozy Drive"
+  desc "File synchronization for Cozy Cloud"
   homepage "https://cozy.io/"
 
   livecheck do
     url "https://nuts.cozycloud.cc/download/channel/stable/osx"
     strategy :header_match
   end
+
+  depends_on macos: ">= :sierra"
 
   app "Cozy Drive.app"
 end

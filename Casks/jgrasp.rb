@@ -1,6 +1,6 @@
 cask "jgrasp" do
-  version "2.0.6_07"
-  sha256 "0ffec1427ec0587f29f1d7765382be42c1732c4da99b9b46504adc260884f124"
+  version "2.0.6_10"
+  sha256 "57bac332eeba0f1769434796c72d5a875f4f9e753fff4bcf41831c2c6626109c"
 
   url "https://jgrasp.org/dl4g/jgrasp/jgrasp#{version.no_dots}.pkg"
   name "jgrasp"
@@ -9,7 +9,6 @@ cask "jgrasp" do
 
   livecheck do
     url "https://spider.eng.auburn.edu/user-cgi/grasp/grasp.pl?;dl=download_jgrasp.html"
-    strategy :page_match
     regex(/jGRASP\s*(\d+(?:\.\d+)*_\d+)\s(?!Beta)/i)
   end
 

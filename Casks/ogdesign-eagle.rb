@@ -1,20 +1,34 @@
 cask "ogdesign-eagle" do
-  version "2.0,8"
+  arch arm: "M1-"
 
-  if Hardware::CPU.intel?
-    sha256 "fd487e03ab89bc85d6a9dff65286f8e2b20a91cfd66d2dfe20624536505af891"
-    url "https://eagleapp.s3-accelerate.amazonaws.com/releases/Eagle-#{version.before_comma}-build#{version.after_comma}.dmg",
-        verified: "eagleapp.s3-accelerate.amazonaws.com/"
-  else
-    sha256 "66d1bcd58ec4efd2426ee40aefe834fa2e367f40e90b798f4625123a8967cef6"
-    url "https://eagleapp.s3-accelerate.amazonaws.com/releases/Eagle-#{version.before_comma}-M1-build#{version.after_comma}.dmg",
-        verified: "eagleapp.s3-accelerate.amazonaws.com/"
-  end
+  version "3.0,30"
+  sha256 arm:   "52d5b1d65282a53a7b3ae946f4479e1f798096be6adf0bfc26e12a1c52c30521",
+         intel: "d781e77225c9a967b91fad59c290872d90a2e64cbbe834c71b2bbeb3942cfcd8"
 
-  appcast "https://eagle.cool/changelog"
+  url "https://r2-app.eagle.cool/releases/Eagle-#{version.csv.first}-#{arch}build#{version.csv.second}.dmg"
   name "Eagle"
   desc "Organize all your reference images in one place"
   homepage "https://eagle.cool/macOS"
 
+  livecheck do
+    url "https://eagle.cool/check-for-update"
+    regex(/Eagle[._-]v?(\d+(?:\.\d+)+)-#{arch}build(\d+(?:\.\d+)*)\.dmg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
+    end
+  end
+
+  depends_on macos: ">= :high_sierra"
+
   app "Eagle.app"
+
+  zap trash: [
+    "~/Library/Application Support/Eagle",
+    "~/Library/Logs/Eagle",
+    "~/Library/Preferences/tw.ogdesign.eagle.plist",
+    "~/Library/Saved Application State/tw.ogdesign.eagle.savedState",
+  ]
 end

@@ -1,15 +1,23 @@
 cask "coscreen" do
-  version "1.7.49-beta"
-  sha256 "052d8c34ad72f30f3aab512a6b35977fb9cd181e46ab83ddac0d5d2a0e0ef316"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://update.coscreen.org/CoScreen-#{version}.dmg",
+  version "4.4.57"
+  sha256 arm:   "87f82f0073b87f6172b31ce203f8645cdbc03ff9f4f02ef765929df091a87aa2",
+         intel: "17655546a245535e09af55ae120640e4f7afb72e8be5e6b2be048e8817775d64"
+
+  url "https://update.coscreen.org/CoScreen-#{version}-stable-#{arch}.dmg",
       verified: "https://update.coscreen.org/"
-  appcast "https://update.coscreen.org/beta-mac.yml"
   name "CoScreen"
   desc "Collaboration tool with multi-user screen sharing"
-  homepage "https://coscreen.co/"
+  homepage "https://www.coscreen.co/"
+
+  livecheck do
+    url "https://update.coscreen.org/stable-mac.yml"
+    strategy :electron_builder
+  end
 
   auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "CoScreen.app"
 

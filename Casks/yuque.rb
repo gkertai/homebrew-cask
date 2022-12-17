@@ -1,25 +1,29 @@
 cask "yuque" do
-  version "0.7.14"
-  sha256 "badc59f2b537b2f611d104f74839f7d1dcec511cdf5e5fd9000675ed544dd093"
+  arch arm: "-arm64"
 
-  url "https://app.nlark.com/yuque-desktop/Yuque-#{version}.dmg",
+  version "2.2.5"
+  sha256 arm:   "8b90a9340da7284d2af3692ad4a6c399fd9b7d8a4f791d6c8f409d512c28bfc4",
+         intel: "0d3118522ce0ea63acacbe53667c99a68f621b9cc47e6007f4c883722d70a2a6"
+
+  url "https://app.nlark.com/yuque-desktop/#{version}/Yuque-#{version}#{arch}.dmg",
       verified: "app.nlark.com/yuque-desktop/"
   name "Yuque"
   name "语雀"
   desc "Cloud knowledge base"
   homepage "https://www.yuque.com/"
 
+  # The stable version is that listed on the download page. See:
+  #   https://github.com/Homebrew/homebrew-cask/pull/111472
   livecheck do
-    url "https://www.yuque.com/yuque/help/changelog"
-    strategy :page_match
-    regex(/下载地址(\d+(?:\.\d+)*)/i)
+    url "https://www.yuque.com/download/"
+    regex(/desktopDownloadVersion%22%3A%22(\d+(?:\.\d+)+)/i)
   end
 
   app "语雀.app"
 
   zap trash: [
     "~/Library/Application Support/yuque-desktop",
-    "~/Library/Saved Application State/com.yuque.app.savedState",
     "~/Library/Preferences/com.yuque.app.plist",
+    "~/Library/Saved Application State/com.yuque.app.savedState",
   ]
 end

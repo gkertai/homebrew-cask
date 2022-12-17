@@ -1,12 +1,17 @@
 cask "marathon-infinity" do
-  version "20210408"
-  sha256 "bd076b8758b6cf18e85968e28d20af49d8dbcce5d0cd7c283531d0dc5e1065ec"
+  version "20221126"
+  sha256 "01b8ddb512f38b4f57109bd4d8fd9fdab06469791652e3fd2036b7ce3ac6fb0c"
 
   url "https://github.com/Aleph-One-Marathon/alephone/releases/download/release-#{version}/MarathonInfinity-#{version}-Mac.dmg",
       verified: "github.com/Aleph-One-Marathon/alephone/"
   name "Marathon Infinity"
   desc "First-person shooter, third in a trilogy"
   homepage "https://alephone.lhowon.org/"
+
+  livecheck do
+    url :homepage
+    regex(%r{href=.*?/MarathonInfinity[._-]v?(\d+(?:\.\d+)*)[._-]Mac\.dmg}i)
+  end
 
   app "Marathon Infinity.app"
 end

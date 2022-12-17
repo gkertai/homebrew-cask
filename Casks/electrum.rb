@@ -1,6 +1,6 @@
 cask "electrum" do
-  version "4.1.2"
-  sha256 "0d7430c0afe3a97ef8283f91fbc70ef35efe4b348a399a6247d055bf91be5241"
+  version "4.3.2"
+  sha256 "dc7260debcbaa87b5a4fc38f163381fc1fce33e3f000095bc457d261fb11a275"
 
   url "https://download.electrum.org/#{version}/electrum-#{version}.dmg"
   name "Electrum"
@@ -8,8 +8,8 @@ cask "electrum" do
   homepage "https://electrum.org/"
 
   livecheck do
-    url "https://github.com/spesmilo/electrum"
-    strategy :github_latest
+    url "https://electrum.org/panel-download.html"
+    regex(/href=.*?electrum[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   depends_on macos: ">= :high_sierra"

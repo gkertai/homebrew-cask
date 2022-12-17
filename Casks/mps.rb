@@ -1,8 +1,11 @@
 cask "mps" do
-  version "2020.3.3,203.7717.1351"
-  sha256 "33e7c996d9a37eb48d9c13328a46cf5f4b209a44829ac77ec54c553f78c5a0d3"
+  arch arm: "macos-aarch64", intel: "macos"
 
-  url "https://download.jetbrains.com/mps/#{version.major_minor}/MPS-#{version.before_comma}-macos.dmg"
+  version "2022.2,222.3345.1295"
+  sha256 arm:   "bdc83d9c7a3430cc2b0b0361a9e4eab82e951bfe87f0e4754106d09850947077",
+         intel: "4e36c60d281596c220287ab2191165be37ef01c3c54ab5f5e4e535c8b81bc754"
+
+  url "https://download.jetbrains.com/mps/#{version.major_minor}/MPS-#{version.csv.first}-#{arch}.dmg"
   name "JetBrains MPS"
   desc "Create your own domain-specific language"
   homepage "https://www.jetbrains.com/mps/"
@@ -10,19 +13,20 @@ cask "mps" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=MPS&latest=true&type=release"
     strategy :page_match do |page|
-      version = page.match(/"version":"(\d+(?:\.\d+)*)/i)
-      build = page.match(/"build":"(\d+(?:\.\d+)*)/i)
-      "#{version[1]},#{build[1]}"
+      JSON.parse(page)["MPS"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "MPS #{version.major_minor}.app"
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "mps") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end
@@ -30,10 +34,10 @@ cask "mps" do
   end
 
   zap trash: [
-    "~/MPSSamples.#{version.before_comma.major_minor}",
-    "~/Library/Application Support/MPS#{version.before_comma.major_minor}",
-    "~/Library/Caches/MPS#{version.before_comma.major_minor}",
-    "~/Library/Logs/MPS#{version.before_comma.major_minor}",
-    "~/Library/Preferences/MPS#{version.before_comma.major_minor}",
+    "~/Library/Application Support/MPS#{version.csv.first.major_minor}",
+    "~/Library/Caches/MPS#{version.csv.first.major_minor}",
+    "~/Library/Logs/MPS#{version.csv.first.major_minor}",
+    "~/Library/Preferences/MPS#{version.csv.first.major_minor}",
+    "~/MPSSamples.#{version.csv.first.major_minor}",
   ]
 end

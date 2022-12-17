@@ -1,10 +1,11 @@
 cask "zalo" do
-  version "21.3.3"
-  sha256 "f2816b001e13ac98a65a1f5721333372681038068543ec40507aa1b9167f47e2"
+  version "22.11.1"
+  sha256 "ce1c6f53c4d17c9f013aa8b12011fc03e88949522cb7d041e59321375136cf53"
 
   url "https://res-zaloapp-aka.zdn.vn/mac/ZaloSetup-#{version}.dmg#",
       verified: "res-zaloapp-aka.zdn.vn/mac/"
   name "Zalo"
+  desc "Messaging and calling application"
   homepage "https://zalo.me/"
 
   livecheck do

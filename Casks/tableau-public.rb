@@ -1,6 +1,6 @@
 cask "tableau-public" do
-  version "2021.1.1"
-  sha256 "a72d0d828a1f4cd38a77649440550e14f1228fb15852539eed6578f912a640e8"
+  version "2022.4.0"
+  sha256 "5f1a960cb8cd8ecc404fae3e0e6d3857ad22e554bbe9fabc75148b27041fc588"
 
   url "https://downloads.tableau.com/public/TableauPublic-#{version.dots_to_hyphens}.dmg"
   name "Tableau Public"
@@ -10,7 +10,7 @@ cask "tableau-public" do
   livecheck do
     url "https://www.tableau.com/downloads/public/mac"
     strategy :header_match do |headers|
-      headers["location"][/-(\d+-\d+-\d+)\.dmg/i, 1].tr("-", ".")
+      headers["location"][/-(\d+(?:-\d+)+)\.dmg/i, 1].tr("-", ".")
     end
   end
 
@@ -19,5 +19,10 @@ cask "tableau-public" do
   uninstall pkgutil: [
     "com.tableausoftware.FLEXNet.*",
     "com.tableausoftware.Public.app",
+  ]
+
+  zap trash: [
+    "~/Library/Caches/com.tableau.caching",
+    "~/Library/Caches/com.tableausoftware.MapTiles",
   ]
 end

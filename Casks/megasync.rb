@@ -1,19 +1,21 @@
 cask "megasync" do
-  version "4.5.0.0"
+  arch arm: "Arm64"
+
+  version "4.8.1"
   sha256 :no_check
 
-  url "https://mega.nz/MEGAsyncSetup.dmg"
+  url "https://mega.nz/MEGAsyncSetup#{arch}.dmg"
   name "MEGAsync"
   desc "Syncs files between computers and MEGA Cloud drives"
   homepage "https://mega.nz/sync"
 
   livecheck do
-    url "https://github.com/meganz/MEGAsync/releases"
-    strategy :page_match
-    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)*)_OSX}i)
+    url :url
+    strategy :extract_plist
   end
 
   auto_updates true
+  depends_on macos: ">= :sierra"
 
   app "MEGAsync.app"
 

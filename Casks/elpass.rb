@@ -1,8 +1,8 @@
 cask "elpass" do
-  version "1.3.3,346"
-  sha256 "f5d1c8578bd28d217f0f179d88ae91b8ea8d4a34efa134ace9ec76e2f69e7648"
+  version "1.5.3,476"
+  sha256 "c4b5cdbf16ab0f2759cf0c9aa34c15d27b609b886098cc0c8ff5c1d3b466b0aa"
 
-  url "https://elpass.app/macos/Elpass-#{version.before_comma}-#{version.after_comma}.zip"
+  url "https://elpass.app/macos/Elpass-#{version.csv.first}-#{version.csv.second}.zip"
   name "Elpass"
   desc "Password manager"
   homepage "https://elpass.app/"
@@ -12,5 +12,14 @@ cask "elpass" do
     strategy :sparkle
   end
 
+  depends_on macos: ">= :sierra"
+
   app "Elpass.app"
+
+  zap trash: [
+    "~/Library/Application Support/app.elpass.macos",
+    "~/Library/Caches/app.elpass.macos",
+    "~/Library/Group Containers/YCKFLA6N72.app.elpass.macos.group",
+    "~/Library/Preferences/app.elpass.macos.plist",
+  ]
 end

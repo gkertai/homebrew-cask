@@ -1,8 +1,8 @@
 cask "freedom" do
-  version "2.5.7,1886"
-  sha256 "fcf4d35252236f56af54f71db7e9b84de258024d32f5919a41e24cf0caa6053e"
+  version "2.13.2,2106"
+  sha256 "41a4be4cc0d9ff765ab4ab9d39908187ae889fb323c4aa273a365bf84e76bede"
 
-  url "https://cdn.freedom.to/installers/updates/mac/#{version.before_comma}/Freedom.zip"
+  url "https://cdn.freedom.to/installers/updates/mac/#{version.csv.first}/Freedom.zip"
   name "Freedom"
   desc "App and website blocker"
   homepage "https://freedom.to/"
@@ -13,6 +13,7 @@ cask "freedom" do
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "Freedom.app"
 end

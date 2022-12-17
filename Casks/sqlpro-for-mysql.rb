@@ -1,8 +1,8 @@
 cask "sqlpro-for-mysql" do
-  version "2020.101"
-  sha256 "77edce8c00fa9953486c2f518eeabb083b738e08d4c376878a3ff149c9bccc23"
+  version "2022.70"
+  sha256 "396eeb755637503f88d89119db7127d440f1b8ce2358b4d27350311580923a67"
 
-  url "https://d3fwkemdw8spx3.cloudfront.net/mysql/SQLProMySQL.#{version}.zip",
+  url "https://d3fwkemdw8spx3.cloudfront.net/mysql/SQLProMySQL.#{version}.app.zip",
       verified: "d3fwkemdw8spx3.cloudfront.net/mysql/"
   name "SQLPro for MySQL"
   desc "MySQL & MariaDB database client"
@@ -16,7 +16,7 @@ cask "sqlpro-for-mysql" do
   app "SQLPro for MySQL.app"
 
   zap trash: [
-    "~/Library/Containers/com.hankinsoft.osx.mysql",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.hankinsoft.osx.mysql.sfl*",
+    "~/Library/Containers/com.hankinsoft.osx.mysql",
   ]
 end

@@ -1,11 +1,17 @@
 cask "http-toolkit" do
-  version "1.3.0"
-  sha256 "8abef770f8438a08a728aadde61d676229cfcd67e8308fee3ea7ef99f4351fab"
+  version "1.12.2"
+  sha256 "27e1f1c68471832869893b7fcdebfee7d867116be384726f9326606754f23588"
 
   url "https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v#{version}/HttpToolkit-#{version}.dmg",
       verified: "github.com/httptoolkit/httptoolkit-desktop/"
   name "HTTP Toolkit"
+  desc "HTTP(S) debugging proxy, analyzer, and client"
   homepage "https://httptoolkit.tech/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "HTTP Toolkit.app"
 

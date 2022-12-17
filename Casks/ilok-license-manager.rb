@@ -1,9 +1,10 @@
 cask "ilok-license-manager" do
-  version "5.3.2,3151"
+  version "5.6.4,4779"
   sha256 :no_check
 
   url "https://installers.ilok.com/iloklicensemanager/LicenseSupportInstallerMac.zip"
   name "iLok License Manager"
+  desc "Software for iLok devices"
   homepage "https://ilok.com/#!license-manager"
 
   livecheck do
@@ -13,13 +14,15 @@ cask "ilok-license-manager" do
     end
   end
 
+  depends_on macos: ">= :sierra"
+
   pkg "License Support.pkg"
 
   uninstall pkgutil:   [
-    "com.paceap.pkg.eden.iLokLicenseManager",
-    "com.paceap.pkg.eden.licensed",
-    "com.paceap.pkg.eden.activationexperience",
-  ],
+              "com.paceap.pkg.eden.iLokLicenseManager",
+              "com.paceap.pkg.eden.licensed",
+              "com.paceap.pkg.eden.activationexperience",
+            ],
             launchctl: [
               "com.paceap.eden.licensed",
               "com.paceap.eden.licensed.agent",

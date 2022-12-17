@@ -1,14 +1,11 @@
 cask "appcode" do
-  version "2021.1,211.6693.150"
+  arch arm: "-aarch64"
 
-  if Hardware::CPU.intel?
-    sha256 "d718e4f69107793038cc6738cf775f3426e4a1d3f5da9eff4cff55e408e4e946"
-    url "https://download.jetbrains.com/objc/AppCode-#{version.before_comma}.dmg"
-  else
-    sha256 "05346c6b28b46ce4c19aa724869acb47befc5192ff814960179e113713f85e82"
-    url "https://download.jetbrains.com/objc/AppCode-#{version.before_comma}-aarch64.dmg"
-  end
+  version "2022.3,223.7571.236"
+  sha256 arm:   "9d5d4107a60e4e0562d6d9ce8117bee59a9fe618a907bf1a477c3aeb1a5a10db",
+         intel: "e43fee6ca311f739ef074c6c4ee2a6ccc391b4722e01cf02720ee7f786b9be37"
 
+  url "https://download.jetbrains.com/objc/AppCode-#{version.csv.first}#{arch}.dmg"
   name "AppCode"
   desc "IDE for Swift, Objective-C, C, and C++ development"
   homepage "https://www.jetbrains.com/objc/"
@@ -16,19 +13,20 @@ cask "appcode" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=AC&latest=true&type=release"
     strategy :page_match do |page|
-      version = page.match(/"version":"(\d+(?:\.\d+)*)/i)
-      build = page.match(/"build":"(\d+(?:\.\d+)*)/i)
-      "#{version[1]},#{build[1]}"
+      JSON.parse(page)["AC"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "AppCode.app"
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "appcode") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

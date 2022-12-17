@@ -15,4 +15,8 @@ cask "yo" do
               "com.sheagcraig.yo.on_demand",
             ],
             pkgutil:   "com.sheagcraig.yo"
+
+  caveats do
+    discontinued
+  end
 end

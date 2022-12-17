@@ -1,16 +1,52 @@
 cask "coteditor" do
-  if MacOS.version <= :yosemite
-    version "3.2.8"
-    sha256 "73dd20d27b75c7b0c46242a465adb3df5b5f0b901f42c5a9a85777a57c4a17d6"
-  elsif MacOS.version <= :el_capitan
+  on_el_capitan :or_older do
     version "3.5.4"
     sha256 "0b2cbf38cc531268e3691f307445e05ae5da64b48ceaf86c4d16b993c9be3e9f"
-  elsif MacOS.version <= :mojave
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_sierra do
     version "3.9.7"
     sha256 "be34d4f800e73cc8363d8b83e1b257a06176dc85d345d680149b108f51686cf2"
-  else
-    version "4.0.2"
-    sha256 "e5d61b781f1985e529f7955be59d0cf4b6ad6c75f7b3148acca2b95871b7e49c"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_high_sierra do
+    version "3.9.7"
+    sha256 "be34d4f800e73cc8363d8b83e1b257a06176dc85d345d680149b108f51686cf2"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_mojave do
+    version "3.9.7"
+    sha256 "be34d4f800e73cc8363d8b83e1b257a06176dc85d345d680149b108f51686cf2"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_catalina do
+    version "4.0.9"
+    sha256 "969e891f4a36146c317150806fee01559d177f956734595c73537affc8897e79"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_big_sur :or_newer do
+    version "4.4.2"
+    sha256 "8553dc6765054cbba0bf4351b809e212dbb0c8c854c869d0fe156454be88ad59"
+
+    livecheck do
+      url :url
+      strategy :github_latest
+    end
   end
 
   url "https://github.com/coteditor/CotEditor/releases/download/#{version}/CotEditor_#{version}.dmg",

@@ -1,6 +1,6 @@
 cask "clip-studio-paint" do
-  version "1.10.6"
-  sha256 "956b22c1c00f79361e372e3a7078ff26d591bdf4306af523b622d96ba16b36b1"
+  version "1.13.0"
+  sha256 "00b253568427e559bb3a5cba64d45f6a558823d2e93660d3e8f15edc06254d4c"
 
   url "https://vd.clipstudio.net/clipcontent/paint/app/#{version.no_dots}/CSP_#{version.no_dots}m_app.pkg"
   name "Clip Studio Paint"
@@ -8,12 +8,11 @@ cask "clip-studio-paint" do
   homepage "https://www.clipstudio.net/en"
 
   livecheck do
-    url "https://www.clipstudio.net/en/dl"
-    strategy :page_match do |page|
-      match = page.match(%r{href=.*?/CSP_(\d+?)(\d+)(\d+?)m_app\.pkg}i)
-      "#{match[1]}.#{match[2]}.#{match[3]}"
-    end
+    url "https://www.clipstudio.net/en/dl/release_note/"
+    regex(/Clip\s+Studio\s+Paint\s+(?:v|Ver\.?|Version)?\s*(\d+(?:\.\d+)+)/i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   installer manual: "CSP_#{version.no_dots}m_app.pkg"
 

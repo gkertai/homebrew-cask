@@ -1,6 +1,6 @@
 cask "checkra1n" do
-  version "0.12.3"
-  sha256 "08be5f1b146447a36ae40446d60304451bce9524ba5a3922ebfee4f37b88d15c"
+  version "0.12.4"
+  sha256 "754bb6ec4747b2e700f01307315da8c9c32c8b5816d0fe1e91d1bdfc298fe07b"
 
   url "https://checkra.in/assets/downloads/macos/#{sha256}/checkra1n%20beta%20#{version}.dmg"
   name "checkra1n"
@@ -9,8 +9,7 @@ cask "checkra1n" do
 
   livecheck do
     url "https://checkra.in/"
-    strategy :page_match
-    regex(%r{href=.*?/checkra1n%20beta%20(\d+(?:\.\d+)*)\.dmg}i)
+    regex(%r{href=.*?/checkra1n%20beta%20(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   app "checkra1n.app"

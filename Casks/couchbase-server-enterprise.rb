@@ -1,27 +1,33 @@
 cask "couchbase-server-enterprise" do
-  if MacOS.version <= :el_capitan
+  on_el_capitan :or_older do
     version "4.5.1"
     sha256 "de014c7c134eb97ff00be6b2e6f5d0da84295ce05bbb7bb3a4d3c747a365cd22"
 
     url "https://packages.couchbase.com/releases/#{version}/couchbase-server-enterprise_#{version}-macos_x86_64.zip"
 
     app "couchbase-server-enterprise_#{version}/Couchbase Server.app"
-  else
-    version "6.6.0"
-    sha256 "9ee7d7c9fd26f48676b06b39e205f45b89c9212a3a370f91ee19b585615f3597"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_sierra :or_newer do
+    version "7.1.3"
+    sha256 "2acf5f3d32482b9595686b1d236be1d477dfa6fe06fd8ee81e2f0b77f824c589"
 
     url "https://packages.couchbase.com/releases/#{version}/couchbase-server-enterprise_#{version}-macos_x86_64.dmg"
 
     app "Couchbase Server.app"
+
+    livecheck do
+      url "https://www.couchbase.com/downloads"
+      regex(/couchbase[._-]server[._-]enterprise[._-]v?(\d+(:?\.\d+)+)[._-]macos[._-]x86[._-]64\.dmg/i)
+    end
   end
 
   name "Couchbase Server"
+  desc "Distributed NoSQL cloud database"
   homepage "https://www.couchbase.com/"
-
-  livecheck do
-    url "http://appcast.couchbase.com/membasex.xml"
-    strategy :sparkle
-  end
 
   conflicts_with cask: "couchbase-server-community"
 end

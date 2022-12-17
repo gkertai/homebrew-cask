@@ -1,16 +1,22 @@
 cask "geph" do
-  version "4.4.1"
-  sha256 "358a1c1a158b436fe0290699bab775aac9be2fd530d385d48bb2f97f99e85b05"
+  version "4.6.3"
+  sha256 "ff085b22525456ea09a726f3744dc71da6b41b414a5982a1d2b1c4fc8c26268b"
 
-  url "https://f001.backblazeb2.com/file/geph4-dl/Geph4Releases/#{version}/geph-macos-#{version}.dmg",
-      verified: "f001.backblazeb2.com/file/geph4-dl/"
+  url "https://sos-ch-dk-2.exo.io/utopia/geph-releases/macos-stable/#{version}/geph-macos.dmg",
+      verified: "sos-ch-dk-2.exo.io/utopia/geph-releases/"
   name "Geph"
   desc "Modular Internet censorship circumvention system"
-  homepage "https://geph.io/"
+  homepage "https://geph.io/en/"
 
   livecheck do
-    skip
+    url :homepage
+    regex(%r{href=.*?v?(\d+(?:\.\d+)+)/geph[._-]macos\.dmg}i)
   end
 
   app "Geph.app"
+
+  zap trash: [
+    "~/Library/Application Support/gephgui#{version.major}",
+    "~/Library/Preferences/io.geph.geph-electron.plist",
+  ]
 end

@@ -1,8 +1,11 @@
 cask "min" do
-  version "1.19.2"
-  sha256 "600c849a8cc33485b467f9d78e013a310ee93b4c1d70dce2e591e68ff1eca109"
+  arch arm: "arm64", intel: "x86"
 
-  url "https://github.com/minbrowser/min/releases/download/v#{version}/Min-v#{version}-darwin-x64.zip",
+  version "1.26.0"
+  sha256 arm:   "6f645edb9d54a096cea780cae83b4a195b0355aceb4fe45a76b1df40d7df5bdc",
+         intel: "48022fe5afddb3eca9dd08e0bbb7cdde1db8d7d937a6b934f42744d16d4eaa3d"
+
+  url "https://github.com/minbrowser/min/releases/download/v#{version}/min-v#{version}-mac-#{arch}.zip",
       verified: "github.com/minbrowser/min/"
   name "Min"
   desc "Minimal browser that protects privacy"

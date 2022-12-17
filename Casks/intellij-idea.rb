@@ -1,14 +1,11 @@
 cask "intellij-idea" do
-  version "2021.1.1,211.7142.45"
+  arch arm: "-aarch64"
 
-  if Hardware::CPU.intel?
-    sha256 "ec43a810329b619b5d52aeda3e6240a698b8df137b2c39c1babd1010d81e5555"
-    url "https://download.jetbrains.com/idea/ideaIU-#{version.before_comma}.dmg"
-  else
-    sha256 "5e4389964c8cca7839e3c97202d1c7047ae50bff276884a1d211a2dd5acbd3c8"
-    url "https://download.jetbrains.com/idea/ideaIU-#{version.before_comma}-aarch64.dmg"
-  end
+  version "2022.3,223.7571.182"
+  sha256 arm:   "d885b573442eaffccd30c291af228e5d5718bff2c23722c8cda2d1be255496cf",
+         intel: "47ba685bf94f89f8bcc05043194a648a6e8efc20f3ab1bdcf844d295ff208aa4"
 
+  url "https://download.jetbrains.com/idea/ideaIU-#{version.csv.first}#{arch}.dmg"
   name "IntelliJ IDEA Ultimate"
   desc "Java IDE by JetBrains"
   homepage "https://www.jetbrains.com/idea/"
@@ -16,19 +13,20 @@ cask "intellij-idea" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release"
     strategy :page_match do |page|
-      version = page.match(/"version":"(\d+(?:\.\d+)*)/i)
-      build = page.match(/"build":"(\d+(?:\.\d+)*)/i)
-      "#{version[1]},#{build[1]}"
+      JSON.parse(page)["IIU"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "IntelliJ IDEA.app"
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "idea") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end
@@ -36,11 +34,12 @@ cask "intellij-idea" do
   end
 
   zap trash: [
+    "~/Library/Application Support/JetBrains/IntelliJIdea#{version.major_minor}",
+    "~/Library/Caches/JetBrains/IntelliJIdea#{version.major_minor}",
+    "~/Library/Logs/JetBrains/IntelliJIdea#{version.major_minor}",
     "~/Library/Preferences/com.jetbrains.intellij.plist",
-    "~/Library/Caches/IntelliJIdea#{version.major_minor}",
-    "~/Library/Logs/IntelliJIdea#{version.major_minor}",
-    "~/Library/Application Support/IntelliJIdea#{version.major_minor}",
     "~/Library/Preferences/IntelliJIdea#{version.major_minor}",
+    "~/Library/Preferences/jetbrains.idea.*.plist",
     "~/Library/Saved Application State/com.jetbrains.intellij.savedState",
   ]
 end

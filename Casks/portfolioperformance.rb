@@ -1,8 +1,11 @@
 cask "portfolioperformance" do
-  version "0.52.0"
-  sha256 "bd24488939981d1538d1b2f8b0d8b4819bdacf59cfdd6d98d2b73ec26e8840e5"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://github.com/buchen/portfolio/releases/download/#{version}/PortfolioPerformance-#{version}.dmg",
+  version "0.59.5"
+  sha256 arm:   "1ef02d552f3dd3456a64190698d10619f13729a17ddff9b68f737c70cead7da9",
+         intel: "46762af0f3c9a6e3c7b6fef59187f9137940bd5268c0d55ebe46173f7cd59e03"
+
+  url "https://github.com/buchen/portfolio/releases/download/#{version}/PortfolioPerformance-#{version}-#{arch}.dmg",
       verified: "github.com/buchen/portfolio/"
   name "Portfolio Performance"
   desc "Calculate the overall performance of an investment portfolio"
@@ -10,8 +13,7 @@ cask "portfolioperformance" do
 
   livecheck do
     url :url
-    strategy :git
-    regex(/^(\d+(?:\.\d+)*)$/)
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
   auto_updates true

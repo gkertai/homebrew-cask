@@ -1,24 +1,28 @@
 cask "vmware-fusion" do
-  version "12.1.1-17801503"
-  sha256 "fbc94a432c00fb9e05dd648cc80dd58cfb052c3aa53f44dc996be02e25a7c270"
+  livecheck_folder = "x86"
+  version "13.0.0,20802013"
+  sha256 "40bb9fbd4b2a18b48138a7fb3285d89187d50caab10506cff81b367b6edc858d"
 
-  url "https://download3.vmware.com/software/fusion/file/VMware-Fusion-#{version}.dmg"
+  url "https://download3.vmware.com/software/FUS-#{version.csv.first.no_dots}/VMware-Fusion-#{version.csv.first}-#{version.csv.second}_universal.dmg"
   name "VMware Fusion"
-  desc "App to run other operating systems without rebooting"
+  desc "Create, manage, and run virtual machines"
   homepage "https://www.vmware.com/products/fusion.html"
 
   livecheck do
     url "https://softwareupdate.vmware.com/cds/vmw-desktop/fusion.xml"
-    strategy :page_match do |page|
-      scan = page.scan(%r{fusion/(\d+(?:\.\d+)+)/(\d+)/core}i)
-      scan.map { |v| "#{v[0]}-#{v[1]}" }
+    regex(%r{fusion/(\d+(?:\.\d+)+)/(\d+)/#{livecheck_folder}}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  conflicts_with cask: "vmware-fusion-tech-preview"
+  depends_on macos: ">= :monterey"
 
   app "VMware Fusion.app"
+  binary "#{appdir}/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"
+  binary "#{appdir}/VMware Fusion.app/Contents/Library/vkd/bin/vctl"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-bridge"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-cfgcli"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-cli"
@@ -26,8 +30,8 @@ cask "vmware-fusion" do
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-natd"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-netifup"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-sniffer"
-  binary "#{appdir}/VMware Fusion.app/Contents/Library/vmrun"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmrest"
+  binary "#{appdir}/VMware Fusion.app/Contents/Library/vmrun"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmss2core"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmware-aewp"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmware-authd"
@@ -43,8 +47,6 @@ cask "vmware-fusion" do
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmware-vmx"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmware-vmx-debug"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmware-vmx-stats"
-  binary "#{appdir}/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"
-  binary "#{appdir}/VMware Fusion.app/Contents/Library/vkd/bin/vctl"
 
   postflight do
     system_command "#{appdir}/VMware Fusion.app/Contents/Library/Initialize VMware Fusion.tool",
@@ -86,8 +88,4 @@ cask "vmware-fusion" do
     "~/Library/Saved Application State/com.vmware.fusion.savedState",
     "~/Library/WebKit/com.vmware.fusion",
   ]
-
-  caveats do
-    kext
-  end
 end

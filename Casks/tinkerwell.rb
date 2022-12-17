@@ -1,8 +1,11 @@
 cask "tinkerwell" do
-  version "2.13.1"
-  sha256 "b5595a0d9b26fdcb7620d1813ad50e8314fb8adcfb8694520137a0d9a76cadc5"
+  arch arm: "-arm64"
 
-  url "https://download.tinkerwell.app/tinkerwell/Tinkerwell-#{version}.dmg"
+  version "3.15.0"
+  sha256 arm:   "98bea832180918be6e0d0bce8e1811690ef33f91b8c3c423f40884c24e5454a7",
+         intel: "5d5bcf627ef14958d04f60b29a2e4d5c54b2013b8e14f4a45e7f94aa4af4e869"
+
+  url "https://download.tinkerwell.app/tinkerwell/Tinkerwell-#{version}#{arch}.dmg"
   name "Tinkerwell"
   desc "Tinker tool for PHP and Laravel developers"
   homepage "https://tinkerwell.app/"

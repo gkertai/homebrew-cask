@@ -1,21 +1,23 @@
 cask "pushplaylabs-sidekick" do
-  version "88.8.44.8934,e695e48"
-  sha256 "171e461c8c8c4f99bd7c64c47bd785c463bdf88e9da95c9c800482477d16e6a3"
+  version "1.0.75"
+  sha256 "2a8e6c420ac6d16ad7b1bedeaffd779a7bd637218980d9798f3535677fa26dda"
 
-  url "https://cdn.meetsidekick.com/builds/sidekick-mac-release-x64-#{version.before_comma}-#{version.after_comma}-df.dmg"
+  url "https://cdn.meetsidekick.com/browser-builds/sidekick-mac-installer-#{version}.pkg"
   name "Sidekick"
   desc "Browser designed for modern work"
   homepage "https://www.meetsidekick.com/"
 
   livecheck do
     url "https://api.meetsidekick.com/downloads/df/mac"
-    strategy :header_match do |headers|
-      match = headers["location"].match(/-(\d+(?:\.\d+)*)-(.*?)-df.dmg/)
-      "#{match[1]},#{match[2]}"
-    end
+    regex(/(\d+(?:\.\d+)+)\.pkg/i)
+    strategy :header_match
   end
 
-  app "Sidekick.app"
+  pkg "sidekick-mac-installer-#{version}.pkg"
+
+  uninstall delete:  "/Applications/Sidekick.app",
+            pkgutil: "org.Sidekick.#{version}",
+            quit:    "com.pushplaylabs.sidekick"
 
   zap trash: [
     "~/Library/Application Support/Sidekick",

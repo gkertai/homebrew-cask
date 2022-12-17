@@ -1,6 +1,6 @@
 cask "bootstrap-studio" do
-  version "5.6.2"
-  sha256 "2940599008dbb8488594274848696d8c1a7106250ddf89bb99ebe55f31be1dc0"
+  version "6.2.1"
+  sha256 "2f504663e5ca5288acc92ee38f27b4c7ee1fb9551655c0a34707ee8207b07132"
 
   url "https://bootstrapstudio.io/releases/desktop/#{version}/Bootstrap%20Studio.dmg"
   name "Bootstrap Studio"
@@ -9,12 +9,10 @@ cask "bootstrap-studio" do
 
   livecheck do
     url "https://bootstrapstudio.io/pages/releases/"
-    strategy :page_match
-    regex(/Version\s*(\d+(?:\.\d+)*)/i)
+    regex(/Version\s*(\d+(?:\.\d+)+)/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
 
   app "Bootstrap Studio.app"
 

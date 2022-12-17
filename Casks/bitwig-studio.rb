@@ -1,6 +1,6 @@
 cask "bitwig-studio" do
-  version "3.3.7"
-  sha256 "ceb104ce25652ac30458418d378320d68c0a174cccc861e66686c20fe04d393d"
+  version "4.4.6"
+  sha256 "21cfba26fa1245335c26e42577ef590b06ea8b2c2719b02cbbc04d4106316bff"
 
   url "https://downloads.bitwig.com/stable/#{version}/Bitwig%20Studio%20#{version}.dmg"
   name "Bitwig Studio"
@@ -9,9 +9,10 @@ cask "bitwig-studio" do
 
   livecheck do
     url "https://www.bitwig.com/download/"
-    strategy :page_match
-    regex(/Bitwig\s*Studio\s*(\d+(?:\.\d+)*)/i)
+    regex(/Bitwig\s*Studio\s*v?(\d+(?:\.\d+)+)/i)
   end
+
+  depends_on macos: ">= :mojave"
 
   app "Bitwig Studio.app"
 

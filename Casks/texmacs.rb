@@ -1,8 +1,11 @@
 cask "texmacs" do
-  version "1.99.20"
-  sha256 "5113622cc423263b01fe45afa07ef05210000f560cf34fd5247063c9838b5172"
+  arch arm: "-arm"
 
-  url "https://ftp.texmacs.org/TeXmacs/tmftp/macos/TeXmacs-#{version}.dmg"
+  version "2.1.2"
+  sha256 arm:   "d0a5abf3dafba31073ffc3bbfbeff5300453954a54495affee8a16a2f9196587",
+         intel: "db1f9a525554d76794e0339cc19fb4d45eee79bce5f7a176c8dc8b8667181b08"
+
+  url "https://ftp.texmacs.org/TeXmacs/tmftp/macos/TeXmacs-#{version}#{arch}.dmg"
   name "GNU TeXmacs"
   desc "Scientific editing platform"
   homepage "https://www.texmacs.org/"

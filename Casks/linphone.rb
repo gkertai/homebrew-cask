@@ -1,16 +1,15 @@
 cask "linphone" do
-  version "4.2.5"
-  sha256 "9e68a923818b24045fc36fe94a0edeaff094baf815ad598dd103eb815661cd0e"
+  version "5.0.2"
+  sha256 "58b50d9ab6557066265080e033384b3d0845d765db42ea98e5c643b7b454c2b0"
 
-  url "https://www.linphone.org/releases/macosx/app/Linphone-#{version}-mac.dmg"
+  url "https://download.linphone.org/releases/macosx/app/Linphone-#{version}-mac.dmg"
   name "Linphone"
   desc "Software for communication systems developers"
   homepage "https://www.linphone.org/"
 
   livecheck do
-    url "https://www.linphone.org/releases/macosx/RELEASE"
-    strategy :page_match
-    regex(%r{/Linphone-(\d+(?:\.\d+)*)-mac\.dmg}i)
+    url "https://download.linphone.org/releases/macosx/app/"
+    regex(/Linphone-(\d+(?:\.\d+)+)-mac\.dmg/i)
   end
 
   app "Linphone.app"

@@ -1,6 +1,6 @@
 cask "webots" do
-  version "R2021a"
-  sha256 "94ba34a3e1393e117a50c3864253f3e108f144cde30b334eee02e331036a3d36"
+  version "R2023a"
+  sha256 "54a1d7a94cef0f1b7cadb5c485dac81224628aa725c92dcf630b7e45c3bf6a4f"
 
   url "https://github.com/cyberbotics/webots/releases/download/#{version}/webots-#{version}.dmg",
       verified: "github.com/cyberbotics/webots/"
@@ -11,8 +11,8 @@ cask "webots" do
 
   livecheck do
     url :url
-    strategy :git
-    regex(/^(R\d+[a-z]+)$/i)
+    strategy :github_latest
+    regex(%r{href=.*?/tag/([\w._-]+)["' >]}i)
   end
 
   auto_updates true

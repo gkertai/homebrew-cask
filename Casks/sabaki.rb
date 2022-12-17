@@ -1,10 +1,14 @@
 cask "sabaki" do
-  version "0.51.1"
-  sha256 "61a4843666fdc6d21d262f47bf5b2b5b13a9f41a2d89667eaab4f13f6728729d"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/SabakiHQ/Sabaki/releases/download/v#{version}/sabaki-v#{version}-mac-x64.7z",
+  version "0.52.2"
+  sha256 arm:   "e2cf00aa5ca0c2a675db847978466ba87ac2af9db33209ba7774be545b0f904c",
+         intel: "5e1a38772cc6926b1880341df128ae2f6172b29128cbb206782c84df6d7ec743"
+
+  url "https://github.com/SabakiHQ/Sabaki/releases/download/v#{version}/sabaki-v#{version}-mac-#{arch}.7z",
       verified: "github.com/SabakiHQ/Sabaki/"
   name "Sabaki"
+  desc "Go board and SGF editor"
   homepage "https://sabaki.yichuanshen.de/"
 
   app "Sabaki.app"

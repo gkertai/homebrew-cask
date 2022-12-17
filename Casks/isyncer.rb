@@ -1,6 +1,6 @@
 cask "isyncer" do
-  version "3.7.0"
-  sha256 "24e1a0e8217531250c2c5e90682295b8036395b4e69f659fe863091e4bb1526f"
+  version "3.9.0"
+  sha256 "552e558f99e4ccdec9e2ec1adfda650851676ac0769fd9ceafcd7803b7a7de37"
 
   url "https://www.isyncer.de/system/iSyncerV#{version}mac-installer.tgz"
   name "iSyncer"
@@ -9,8 +9,7 @@ cask "isyncer" do
 
   livecheck do
     url "https://www.isyncer.de/en/releases/"
-    strategy :page_match
-    regex(%r{href=.*?/iSyncerV(\d+(?:\.\d+)*)mac-installer\.tgz}i)
+    regex(/href=.*?iSyncer[._-]?v?(\d+(?:\.\d+)+)[._-]?mac[._-]installer\.t/i)
   end
 
   pkg "iSyncer-installer-#{version}.pkg"

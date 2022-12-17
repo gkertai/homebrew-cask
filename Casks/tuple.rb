@@ -1,20 +1,25 @@
 cask "tuple" do
-  version "0.85.1-2021-04-01-e0acf3ba"
-  sha256 "02c37ed57c66f6540f6c0e94e2d0e1df55c1c270fb45bb47b1aa2c5d6ee5491f"
+  version "0.99.7,2022-12-15,73ca8ae50"
+  sha256 "e8f135cd0ec2dec8cd13bc565cd0cb646ac1417546a1438a34f1e29baab1f6b7"
 
-  url "https://s3.us-east-2.amazonaws.com/tuple-releases/production/sparkle/tuple-#{version}.zip",
-      verified: "s3.us-east-2.amazonaws.com/tuple-releases/"
+  url "https://d32ifkf9k9ezcg.cloudfront.net/production/sparkle/tuple-#{version.tr(",", "-")}.zip",
+      verified: "d32ifkf9k9ezcg.cloudfront.net/"
   name "Tuple"
   desc "Remote pair programming app"
   homepage "https://tuple.app/"
 
   livecheck do
-    url "https://s3.us-east-2.amazonaws.com/tuple-releases/production/sparkle/appcast.xml"
-    strategy :sparkle, &:version
+    url "https://d32ifkf9k9ezcg.cloudfront.net/production/sparkle/appcast.xml"
+    strategy :sparkle do |item|
+      match = item.version.match(/^v?(\d+(?:\.\d+)+)[._-](\d+(?:-\d+)+)[._-](\h+)$/i)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]},#{match[3]}"
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :catalina"
 
   app "Tuple.app"
 

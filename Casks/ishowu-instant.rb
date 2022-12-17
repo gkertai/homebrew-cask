@@ -1,8 +1,8 @@
 cask "ishowu-instant" do
-  version "1.4.4,1257"
-  sha256 "b166097006dc3e309a7e27981b57c979291587f254785e9e2ed33b8c313a6dbe"
+  version "1.4.13,1427"
+  sha256 "c4ba92e5e8ac61e089679361cef2af1bd31ee275d5b78f9afd133491ea02e37c"
 
-  url "https://www.shinywhitebox.com/downloads/instant/iShowU_Instant_#{version.before_comma}.dmg"
+  url "https://www.shinywhitebox.com/downloads/instant/iShowU_Instant_#{version.csv.first}.dmg"
   name "iShowU Instant"
   desc "Realtime screen recording"
   homepage "https://www.shinywhitebox.com/ishowu-instant"

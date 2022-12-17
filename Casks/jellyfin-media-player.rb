@@ -1,12 +1,17 @@
 cask "jellyfin-media-player" do
-  version "1.5.0"
-  sha256 "cdbab31a50df1ec355ce5fcda42930ef6c49ae84186d02ac9c905154adab3858"
+  version "1.7.1"
+  sha256 "613e4e29bc27d973a9fd35780d534dbc07e072f7c41542439b9582a09a97505b"
 
   url "https://github.com/jellyfin/jellyfin-media-player/releases/download/v#{version}/JellyfinMediaPlayer-#{version}-macos.dmg",
       verified: "github.com/jellyfin/jellyfin-media-player/"
   name "jellyfin-media-player"
   desc "Jellyfin desktop client"
   homepage "https://jellyfin.org/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "Jellyfin Media Player.app"
 

@@ -1,9 +1,10 @@
 cask "spacelauncher" do
-  version "1.5,88"
+  version "1.6,89"
   sha256 :no_check
 
   url "https://spacelauncherapp.com/download/SpaceLauncher.zip"
   name "SpaceLauncher"
+  desc "App launcher/switcher"
   homepage "https://spacelauncherapp.com/"
 
   livecheck do
@@ -12,4 +13,9 @@ cask "spacelauncher" do
   end
 
   app "SpaceLauncher.app"
+
+  zap trash: [
+    "~/Library/Application Support/name.guoc.SpaceLauncher",
+    "~/Library/Preferences/name.guoc.SpaceLauncher.plist",
+  ]
 end

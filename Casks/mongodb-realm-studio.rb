@@ -1,16 +1,16 @@
 cask "mongodb-realm-studio" do
-  version "10.1.2"
-  sha256 "4514a0a47c60c58148d8cc7ce47c0253638cd08e16a26ee78bf8aafa511aea92"
+  version "13.0.2"
+  sha256 "39f8a9bc620084190e511c86d1f3aafac1abb18234d803b8a6573838a6541b1a"
 
-  url "https://github.com/realm/realm-studio/releases/download/v#{version}/MongoDB.Realm.Studio-#{version}.dmg",
+  url "https://github.com/realm/realm-studio/releases/download/v#{version}/Realm.Studio-#{version}.dmg",
       verified: "github.com/realm/realm-studio/"
-  name "MongoDB Realm Studio"
+  name "Realm Studio"
   desc "Tool for the Realm Database and Realm Platform"
-  homepage "https://docs.mongodb.com/realm-legacy/products/realm-studio.html"
+  homepage "https://realm.io/products/realm-studio/"
 
   auto_updates true
 
-  app "MongoDB Realm Studio.app"
+  app "Realm Studio.app"
 
   zap delete: [
     "~/Library/Application Support/Realm Studio",

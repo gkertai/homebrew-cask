@@ -1,14 +1,11 @@
 cask "logseq" do
-  version "0.0.20"
+  arch arm: "arm64", intel: "x64"
 
-  if Hardware::CPU.intel?
-    sha256 "f2f688f4fc199b09e529ea99fdc03c46f909c509bf7e9aba66d24d617c8c343a"
-    url "https://github.com/logseq/logseq/releases/download/#{version}/logseq-darwin-x64-#{version}.dmg"
-  else
-    sha256 "165928e9a6916cc522f33dbcd2172a486837e32051b654658407ed4bdc4d40ae"
-    url "https://github.com/logseq/logseq/releases/download/#{version}/logseq-darwin-arm64-#{version}.dmg"
-  end
+  version "0.8.12"
+  sha256 arm:   "be997998ec3a1e714312f065d684d3126240fdbbe0a4ae3a583207b94707b846",
+         intel: "35e0e611dcd60d0bfe854ea2e2a87edb6475a2b0ba57c807ddf5b369f37dfd9d"
 
+  url "https://github.com/logseq/logseq/releases/download/#{version}/logseq-darwin-#{arch}-#{version}.dmg"
   name "Logseq"
   desc "Privacy-first, open-source platform for knowledge sharing and management"
   homepage "https://github.com/logseq/logseq"

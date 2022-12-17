@@ -1,8 +1,11 @@
 cask "dbeaver-enterprise" do
-  version "21.0.0"
-  sha256 "f5ef25122d8bee607f4343d48763acc7acbb2b158c6b8cf33cb93a3edc5943f0"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://dbeaver.com/files/#{version}/dbeaver-ee-#{version}-macos.dmg"
+  version "22.3.0"
+  sha256 arm:   "ce209a7e7782aea970f6c3d237743dfd636409e5512cd104fa00751ea87a6651",
+         intel: "99c77d9ab717fe6b3b017b3fa037f56393a4683181dab97b0d25d74192946da7"
+
+  url "https://dbeaver.com/files/#{version}/dbeaver-ee-#{version}-macos-#{arch}.dmg"
   name "DBeaver Enterprise Edition"
   desc "Universal database tool and SQL client"
   homepage "https://dbeaver.com/"
@@ -14,7 +17,11 @@ cask "dbeaver-enterprise" do
 
   app "DBeaverEE.app"
 
-  caveats do
-    depends_on_java "8+"
-  end
+  uninstall signal: ["TERM", "com.dbeaver.product.enterprise"]
+
+  zap trash: [
+    "~/Library/DBeaverData",
+    "~/Library/Preferences/com.dbeaver.product.enterprise.plist",
+    "~/Library/Saved Application State/com.dbeaver.product.enterprise.savedState",
+  ]
 end

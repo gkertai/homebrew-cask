@@ -1,12 +1,19 @@
 cask "ghost-browser" do
-  version "2.1.1.19"
-  sha256 "086ed71f1d0315c791651b0f1ea911277b92b3d4237949dee6782a163fbd4562"
+  arch arm: "_arm64"
 
-  url "https://ghostbrowser.s3.amazonaws.com/downloads/GhostBrowser-#{version}.dmg",
-      verified: "ghostbrowser.s3.amazonaws.com/"
-  appcast "https://ghostbrowser.s3.amazonaws.com/updates/changelog.html"
+  version "2.1.4.4"
+  sha256 arm:   "fbc727ec4ea20128993645bce3ca93d58c322fc8f12bb45ee435435a42129df0",
+         intel: "a0b30ab8366f44bb8938fb8a954f978b68dbc170abef78bfb96ecd9992393232"
+
+  url "https://downloads.ghostbrowser.com/GhostBrowser-#{version}#{arch}.dmg"
   name "Ghost Browser"
+  desc "Web browser"
   homepage "https://ghostbrowser.com/download/"
+
+  livecheck do
+    url "https://ghostbrowser.s3.amazonaws.com/updates/changelog.html"
+    regex(/>\s*Version\s*(\d+(?:\.\d+)+)/i)
+  end
 
   app "Ghost Browser.app"
 end

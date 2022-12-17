@@ -1,15 +1,16 @@
 cask "iina" do
-  version "1.1.2,128"
-  sha256 "783ff165c73839c87cf9fd5f4418b87131063c3be77abc94dfca0585aa992b98"
+  version "1.3.1"
+  sha256 "c646642a2884cb0516922170e0f6d4990b12b41d6244b08d53f318dbb9518c2f"
 
-  url "https://dl.iina.io/IINA.v#{version.before_comma}.dmg"
+  url "https://github.com/iina/iina/releases/download/v#{version}/IINA.v#{version}.dmg",
+      verified: "github.com/iina/iina/"
   name "IINA"
   desc "Free and open-source media player"
   homepage "https://iina.io/"
 
   livecheck do
-    url "https://www.iina.io/appcast.xml"
-    strategy :sparkle
+    url :url
+    strategy :github_latest
   end
 
   auto_updates true
@@ -26,10 +27,12 @@ cask "iina" do
     "~/Library/Caches/com.colliderli.iina",
     "~/Library/Containers/com.colliderli.iina.OpenInIINA",
     "~/Library/Cookies/com.colliderli.iina.binarycookies",
+    "~/Library/HTTPStorages/com.colliderli.iina",
     "~/Library/Logs/com.colliderli.iina",
     "~/Library/Logs/DiagnosticReports/IINA*.crash",
     "~/Library/Preferences/com.colliderli.iina.plist",
     "~/Library/Safari/Extensions/Open in IINA*.safariextz",
     "~/Library/Saved Application State/com.colliderli.iina.savedState",
+    "~/Library/WebKit/com.colliderli.iina",
   ]
 end

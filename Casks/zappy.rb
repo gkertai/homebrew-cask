@@ -1,9 +1,10 @@
 cask "zappy" do
-  version "2.9.1"
-  sha256 :no_check
+  version "3.1.6"
+  sha256 "ad2bb94eddca690477efe9c2465b73d27cd48b1dd38d56d36553496252c90333"
 
-  url "https://zappy.zapier.com/releases/zappy-latest.dmg"
+  url "https://zappy.zapier.com/releases/zappy-#{version}.dmg"
   name "Zappy"
+  desc "Screen capture tool for remote teams"
   homepage "https://zapier.com/zappy"
 
   livecheck do
@@ -12,6 +13,7 @@ cask "zappy" do
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "Zappy.app"
 

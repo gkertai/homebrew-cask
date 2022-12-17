@@ -1,18 +1,29 @@
 cask "mailbutler" do
-  version "3919,26021"
-  sha256 "81bb0b66b0e09ddcc1fa662cb9d079d586f6f36a221df65c2dc5d19436154d7f"
+  version "5825,2577107"
+  sha256 "bd780edfadeead102f5db33eeeaaf4c0e1592f624993d4db3fa07b1bee7ad890"
 
-  url "https://downloads.mailbutler.io/sparkle/public/Mailbutler_#{version.before_comma}-#{version.after_comma}.zip"
+  url "https://downloads.mailbutler.io/sparkle/public/Mailbutler_#{version.csv.first}-#{version.csv.second}.zip"
   name "Mailbutler"
   desc "Personal assistant and productivity tool for Apple Mail"
   homepage "https://www.mailbutler.io/"
 
   livecheck do
-    url "https://www.mailbutler.io/appcast2.php"
+    url "https://downloads.mailbutler.io/sparkle/public/appcast.xml"
     strategy :sparkle
   end
 
   depends_on macos: ">= :high_sierra"
 
   app "Mailbutler.app"
+
+  uninstall delete: "/Library/Mail/Bundles/Mailbutler.mailbundle"
+
+  zap trash: [
+    "~/Library/Application Support/com.mailbutler.app",
+    "~/Library/Caches/com.mailbutler.app",
+    "~/Library/LaunchAgents/com.mailbutler.agent.plist",
+    "~/Library/Preferences/com.mailbutler.agent.plist",
+    "~/Library/Preferences/com.mailbutler.app.plist",
+    "~/Library/Saved Application State/com.mailbutler.app.savedState",
+  ]
 end

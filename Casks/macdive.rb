@@ -1,6 +1,6 @@
 cask "macdive" do
-  version "2.13.1"
-  sha256 "8d2522e2cacfcd416095153f7bc930bba12d3de6803db2e63d6cfc2672367ef7"
+  version "2.16.2"
+  sha256 "ea18062585b1bed799d27ee68cfa8cce27ca5b005eaf255118cb153e3a44f82e"
 
   url "https://www.mac-dive.com/downloads/MacDive_#{version}.dmg"
   name "MacDive"
@@ -13,4 +13,10 @@ cask "macdive" do
   end
 
   app "MacDive.app"
+
+  zap trash: [
+    "~/Library/Application Support/MacDive",
+    "~/Library/Preferences/com.mintsoftware.MacDive2.plist",
+    "~/Library/Saved Application State/com.mintsoftware.MacDive2.savedState",
+  ]
 end

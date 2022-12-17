@@ -1,13 +1,14 @@
 cask "intel-haxm" do
-  version "7.6.6"
-  sha256 "ba2ecae32acc4d635bf2b8edc2dffc0679076e0a74a707597b53291aa0fa4263"
+  version "7.8.0"
+  sha256 "4d30b68eccd31a8534d976e884de8e728746bf1d568912af23c894c8818481c6"
 
-  url "https://github.com/intel/haxm/releases/download/v#{version}/haxm-macosx_v#{version.dots_to_underscores}.zip",
-      verified: "github.com/intel/haxm/"
+  url "https://github.com/intel/haxm/releases/download/v#{version}/haxm-macosx_v#{version.dots_to_underscores}.zip"
   name "Intel HAXM"
-  homepage "https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager"
+  desc "Hardware-assisted virtualization engine (hypervisor)"
+  homepage "https://github.com/intel/haxm"
 
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :sierra"
+  depends_on arch: :x86_64
 
   installer script: {
     executable: "silent_install.sh",
@@ -23,6 +24,6 @@ cask "intel-haxm" do
             }
 
   caveats do
-    license "https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager-end-user-license-agreement-macosx"
+    kext
   end
 end

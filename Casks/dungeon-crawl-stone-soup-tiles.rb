@@ -1,8 +1,8 @@
 cask "dungeon-crawl-stone-soup-tiles" do
-  version "0.26.1"
-  sha256 "1f83a6dde964df8ad3cf6dc4b8763f2be47525f590fa2e4106a66a698ce61709"
+  version "0.29.1"
+  sha256 "c5d80fc56100cfdfae0ce04f32cca7f32fc1ca2cfe6ddbab19cd969a3ad8f7d3"
 
-  url "https://github.com/crawl/crawl/releases/download/#{version}/dcss-#{version}-macos-tiles.zip",
+  url "https://github.com/crawl/crawl/releases/download/#{version}/dcss-#{version}-macos-tiles-universal.zip",
       verified: "github.com/crawl/crawl/releases/"
   name "Dungeon Crawl Stone Soup"
   desc "Game of dungeon exploration, combat and magic"

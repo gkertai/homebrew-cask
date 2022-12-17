@@ -1,8 +1,8 @@
 cask "vagrant" do
-  version "2.2.16"
-  sha256 "607ae066173438da8314c3f050d7e2b65aa08877109b9cd2341c83743d460e42"
+  version "2.3.4"
+  sha256 "8fd27ac9b6faa7a42fcf4b74b25150301f957e9251a1f193d1195b31464fe054"
 
-  url "https://releases.hashicorp.com/vagrant/#{version}/vagrant_#{version}_x86_64.dmg",
+  url "https://releases.hashicorp.com/vagrant/#{version}/vagrant_#{version}_darwin_amd64.dmg",
       verified: "hashicorp.com/vagrant/"
   name "Vagrant"
   desc "Development environment"
@@ -16,10 +16,10 @@ cask "vagrant" do
   pkg "vagrant.pkg"
 
   uninstall script:  {
-    executable: "uninstall.tool",
-    input:      ["Yes"],
-    sudo:       true,
-  },
+              executable: "uninstall.tool",
+              input:      ["Yes"],
+              sudo:       true,
+            },
             pkgutil: "com.vagrant.vagrant"
 
   zap trash: "~/.vagrant.d"

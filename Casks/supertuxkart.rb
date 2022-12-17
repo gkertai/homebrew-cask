@@ -1,6 +1,6 @@
 cask "supertuxkart" do
-  version "1.2"
-  sha256 "0ce988c748f254dcf2cf441c575e4715ee578bb439a9535b045cc1a60618a2ed"
+  version "1.4"
+  sha256 "21a7fb34132036c5810a8b48527513981d98d09d27d33b15e2f428bdc492c89d"
 
   url "https://github.com/supertuxkart/stk-code/releases/download/#{version}/SuperTuxKart-#{version}-mac.zip",
       verified: "github.com/supertuxkart/stk-code"
@@ -14,4 +14,9 @@ cask "supertuxkart" do
   end
 
   app "SuperTuxKart.app"
+
+  zap trash: [
+    "~/Library/Application Support/SuperTuxKart",
+    "~/Library/Saved Application State/net.sourceforge.supertuxkart.savedState",
+  ]
 end

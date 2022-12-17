@@ -1,21 +1,28 @@
 cask "araxis-merge" do
-  if MacOS.version <= :yosemite
-    version "2017.4884"
-    sha256 "abba11a92e1f50d913356d31123bed5bb08838ce39c4659206fd24c32432c4b3"
-    url "https://www.araxis.com/download/Merge#{version}-OSX10.10.dmg"
-  else
-    version "2021.5533"
-    sha256 "68decc2188cf75a2aec1f6f75ce7edfd1c4d7e588d47cdb677478eddeffab3b2"
-    url "https://www.araxis.com/download/Merge#{version}-macOS.dmg"
+  on_mojave :or_older do
+    version "2021.5602"
+    sha256 "06c56e6d08057090f3718b6db560e2a79551f953d4c83c0fad8b60f415c59347"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_catalina :or_newer do
+    version "2022.5809"
+    sha256 "d71e85e710d30c993fd06c283cdce54cfc026bec698224c8525c977c502d993b"
+
+    livecheck do
+      url "https://www.araxis.com/merge/download.en"
+      regex(/href=.*?Merge[._-]?v?(\d+(?:\.\d+)+)-macOS\.dmg/i)
+    end
   end
 
+  url "https://www.araxis.com/download/Merge#{version}-macOS.dmg"
   name "Araxis Merge"
+  desc "Two and three-way file comparison, merging and folder synchronization"
   homepage "https://www.araxis.com/merge/"
 
-  livecheck do
-    url "https://www.araxis.com/merge/download.en"
-    regex(/href=.*?Merge[._-]?v?(\d+(?:\.\d+)+)-macOS\.dmg/i)
-  end
+  depends_on macos: ">= :mojave"
 
   app "Araxis Merge.app"
   binary "#{appdir}/Araxis Merge.app/Contents/Utilities/araxisgitdiff"

@@ -1,26 +1,27 @@
 cask "ultimaker-cura" do
-  version "4.9.0"
-  sha256 "437d22769f5e47095c3048ff378f4f56bd5bafb701c2bcc192a05e412d4c609e"
+  version "5.2.1"
+  sha256 "2d8a48bd060f822ad7ef2ec1e4a1853d10e7478460738406fc376c594bd08061"
 
-  url "https://download.ultimaker.com/cura/Ultimaker_Cura-#{version}-Darwin.dmg"
+  url "https://github.com/Ultimaker/Cura/releases/download/#{version}/Ultimaker-Cura-#{version}-mac.dmg",
+      verified: "github.com/Ultimaker/Cura/"
   name "Ultimaker Cura"
   name "Cura"
   desc "3D printer and slicing GUI"
-  homepage "https://ultimaker.com/en/products/cura-software"
+  homepage "https://ultimaker.com/software/ultimaker-cura"
 
   livecheck do
-    url "https://github.com/Ultimaker/Cura"
+    url :url
     strategy :github_latest
   end
 
-  app "Ultimaker Cura.app"
+  app "Ultimaker-Cura.app"
 
-  uninstall quit: "nl.ultimaker.cura"
+  uninstall quit: "nl.ultimaker.cura.dmg"
 
   zap trash: [
     "~/.cura",
     "~/Library/Application Support/cura",
-    "~/Library/Preferences/nl.ultimaker.cura.Ultimaker Cura.plist",
-    "~/Library/Saved Application State/nl.ultimaker.cura.savedState",
+    "~/Library/Preferences/nl.ultimaker.cura.dmg.plist",
+    "~/Library/Saved Application State/nl.ultimaker.cura.dmg.savedState",
   ]
 end

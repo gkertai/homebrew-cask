@@ -1,12 +1,17 @@
 cask "boost-note" do
-  version "0.16.0"
-  sha256 "420d26d01c115cccaa353ccd280cd7ebdb45d6cc2f9b2b7ba3f29ac6f610fa0a"
+  version "0.23.1"
+  sha256 "7495fb235067c6548179a7e6fbaaa728e9616b92e5b5984481d4c97f84996953"
 
   url "https://github.com/BoostIO/BoostNote.next/releases/download/v#{version}/boost-note-mac.dmg",
       verified: "github.com/BoostIO/BoostNote.next/"
   name "Boostnote.Next"
   desc "Markdown note editor for developers"
   homepage "https://boostnote.io/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "Boost Note.app"
 

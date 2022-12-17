@@ -1,11 +1,18 @@
 cask "tinderbox" do
-  version "8.9.1"
-  sha256 "53f416de9f08034c6c20069ae8363b8bc5f228d9c63b462f8c82fb35609f2696"
+  version "9.5.1"
+  sha256 "f98ff75e600bd10ef1e5e80eb69bbdf5ae5d844c0fd7118ac877ca7e549987df"
 
   url "https://www.eastgate.com/download/tbx#{version.no_dots}.dmg"
-  appcast "https://eastgate.com/Tinderbox/download.html"
   name "Tinderbox"
+  desc "Tool to take, visualize and analyze notes"
   homepage "https://eastgate.com/Tinderbox/"
+
+  livecheck do
+    url :homepage
+    regex(/>Now available:.*?Tinderbox\s+v?(\d+(?:\.\d+)+)[<\s]/im)
+  end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Tinderbox #{version.major}.app"
 end

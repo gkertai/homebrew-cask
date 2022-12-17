@@ -1,6 +1,6 @@
 cask "stats" do
-  version "2.5.13"
-  sha256 "71895dadbba2b0dd5d16f2eb727440064f7fdf39b75468bb3bdea544cd0ac3b5"
+  version "2.8.1"
+  sha256 "53bf9881bb0cd981ea816bdbd3a7acfd148bd76113233d57058d310d78df2099"
 
   url "https://github.com/exelban/stats/releases/download/v#{version}/Stats.dmg"
   name "Stats"
@@ -15,10 +15,10 @@ cask "stats" do
   uninstall quit: "eu.exelban.Stats"
 
   zap trash: [
-    "~/Library/Preferences/eu.exelban.Stats.plist",
     "~/Library/Application Scripts/eu.exelban.Stats.LaunchAtLogin",
+    "~/Library/Caches/eu.exelban.Stats",
     "~/Library/Containers/eu.exelban.Stats.LaunchAtLogin",
     "~/Library/Cookies/eu.exelban.Stats.binarycookies",
-    "~/Library/Caches/eu.exelban.Stats",
+    "~/Library/Preferences/eu.exelban.Stats.plist",
   ]
 end

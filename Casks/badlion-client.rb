@@ -1,6 +1,6 @@
 cask "badlion-client" do
-  version "3.1.9"
-  sha256 "25eaa716c22d0948e81bb56ba6df83f9baeb0476088dc51f15259210c8982151"
+  version "3.12.2"
+  sha256 "2e8cb4fb78ec1f72e192600c354ad9bc3be2e2a98f86b0389289f7752c695f79"
 
   url "https://client-updates.badlion.net/Badlion%20Client-#{version}.dmg"
   name "Badlion Client"
@@ -15,8 +15,8 @@ cask "badlion-client" do
   app "Badlion Client.app"
 
   zap trash: [
+    "~/Library/Application Support/Badlion Client",
     "~/Library/Caches/net.badlion.client",
     "~/Library/Caches/net.badlion.client.ShipIt",
-    "~/Library/Application Support/Badlion Client",
   ]
 end

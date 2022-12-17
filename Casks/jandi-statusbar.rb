@@ -7,6 +7,10 @@ cask "jandi-statusbar" do
   desc "Github Contributions in your status bar"
   homepage "https://github.com/techinpark/Jandi"
 
+  livecheck do
+    skip "No reliable way to get version info"
+  end
+
   app "jandi.app"
 
   zap trash: [

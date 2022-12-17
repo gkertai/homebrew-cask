@@ -1,8 +1,8 @@
 cask "beatunes" do
-  version "5.2.21"
-  sha256 "6d4efb8314815d5bed0e1a4ffba3061a23475f7b43a12998d9fa2c6cdf89375f"
+  version "5.2.30"
+  sha256 "cc81ba7f42ddf1c50ffa39c2c4c1bfa180f43837b7ebc950ae3cd33c32bf67d9"
 
-  url "http://coxy.beatunes.com/download/beaTunes-#{version.dots_to_hyphens}.dmg"
+  url "https://coxy.beatunes.com/download/beaTunes-#{version.dots_to_hyphens}.dmg"
   name "beaTunes"
   desc "Analyze, inspect, and play songs"
   homepage "https://www.beatunes.com/"
@@ -10,12 +10,14 @@ cask "beatunes" do
   livecheck do
     url "https://www.beatunes.com/en/beatunes-download.html"
     strategy :page_match do |page|
-      v = page[/href=.*?beaTunes-(\d+(?:-\d+)*)\.dmg/i, 1]
-      v.tr("-", ".")
+      match = page[/href=.*?beaTunes[._-]?v?(\d+(?:-\d+)+)\.dmg/i, 1]
+      next if match.blank?
+
+      match.tr("-", ".")
     end
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :el_capitan"
 
   app "beaTunes#{version.major}.app"
 

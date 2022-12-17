@@ -1,8 +1,8 @@
 cask "ubar" do
-  version "4.1.7,417"
-  sha256 "03990e92a871b6a2bb7af840bceef59325eaad8678d31ba5ed256faa0beea745"
+  version "4.2.1,421"
+  sha256 "a9c64011f86de3975f3a5c9f616ea93ca84adae836b61ff4cdbb7f86546ed4c5"
 
-  url "https://www.brawersoftware.com/downloads/ubar/ubar#{version.after_comma}.zip"
+  url "https://www.brawersoftware.com/downloads/ubar/ubar#{version.csv.second}.zip"
   name "uBar"
   desc "Window manager and productivity tool"
   homepage "https://brawersoftware.com/products/ubar"
@@ -18,6 +18,8 @@ cask "ubar" do
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/ca.brawer.ubar.sfl*",
     "~/Library/Application Support/uBar",
     "~/Library/Caches/ca.brawer.uBar",
+    "~/Library/HTTPStorages/ca.brawer.uBar",
     "~/Library/Preferences/ca.brawer.uBar.plist",
+    "~/Library/WebKit/ca.brawer.uBar",
   ]
 end

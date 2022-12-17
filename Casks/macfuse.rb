@@ -1,12 +1,21 @@
 cask "macfuse" do
-  version "4.1.0"
-  sha256 "3cb6a49406fd036c50ef1b4ad717a377f4dcf182811bde172d69f1c289791085"
+  version "4.4.1"
+  sha256 "2a2d0f37ec5fcff547c5efa7d08539103a0b46bc16080c2b41a7e749f6e65c61"
 
   url "https://github.com/osxfuse/osxfuse/releases/download/macfuse-#{version}/macfuse-#{version}.dmg",
       verified: "github.com/osxfuse/osxfuse/"
   name "macFUSE"
   desc "File system integration"
   homepage "https://osxfuse.github.io/"
+
+  livecheck do
+    url "https://osxfuse.github.io/releases/CurrentRelease.plist"
+    regex(/macfuse[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+  end
+
+  auto_updates true
+  conflicts_with cask: "macfuse-dev"
+  depends_on macos: ">= :sierra"
 
   pkg "Extras/macFUSE #{version}.pkg"
 
@@ -19,7 +28,9 @@ cask "macfuse" do
     "io.macfuse.installer.components.preferencepane",
   ]
 
+  zap trash: "/Library/PreferencePanes/macFUSE.prefPane"
+
   caveats do
-    reboot
+    kext
   end
 end

@@ -1,32 +1,39 @@
 cask "dotnet-sdk" do
-  if MacOS.version <= :sierra
-    version "2.2.402,7430e32b-092b-4448-add7-2dcf40a7016d:1076952734fbf775062b48344d1a1587"
-    sha256 "e74d816bc034d0fcdfa847286a6cad097227d4864da1c97fe801012af0c26341"
-  else
-    version "5.0.202,749775e4-7b6f-4367-bb7a-9cb63a818dae:c2614b34e234fa03dc65320a8a954570"
-    sha256 "9c1d1fc5e57845006a4102e01ce9c313b9fc540957209820cdcd8d8ae19bed82"
+  arch arm: "arm64", intel: "x64"
+
+  on_intel do
+    version "7.0.101,937c147f-28e2-4f09-b775-c3e3f910fa92,d44e678722d66d028061cd3cf09bfebd"
+    sha256 "7777f0e6db89fc8cea9f8c6965fe4b41a0cf316d1f064ae2f3de8462abd4af97"
+  end
+  on_arm do
+    version "7.0.101,ea9de698-864c-4ddb-8ff3-1bf068c6b1a7,cf5d147f2c167317394058deb4d4b0a7"
+    sha256 "7a4f491a3f587a18b1249162bccc72157ed8bdb5600bdef32caeaa374a71f548"
   end
 
-  url "https://download.visualstudio.microsoft.com/download/pr/#{version.after_comma.before_colon}/#{version.after_colon}/dotnet-sdk-#{version.before_comma}-osx-x64.pkg"
-  appcast "https://github.com/dotnet/sdk/releases.atom"
+  url "https://download.visualstudio.microsoft.com/download/pr/#{version.csv.second}/#{version.csv.third}/dotnet-sdk-#{version.csv.first}-osx-#{arch}.pkg"
   name ".NET SDK"
   desc "Developer platform"
   homepage "https://www.microsoft.com/net/core#macos"
+
+  livecheck do
+    cask "dotnet"
+    regex(%r{/download/pr/([^/]+)/([^/]+)/dotnet-sdk-v?(\d+(?:\.\d+)+)-osx-#{arch}\.pkg}i)
+  end
 
   conflicts_with cask: [
     "dotnet",
     "homebrew/cask-versions/dotnet-preview",
     "homebrew/cask-versions/dotnet-sdk-preview",
-  ]
-  depends_on macos: ">= :sierra"
+  ], formula: "dotnet"
+  depends_on macos: ">= :mojave"
 
-  pkg "dotnet-sdk-#{version.before_comma}-osx-x64.pkg"
+  pkg "dotnet-sdk-#{version.csv.first}-osx-#{arch}.pkg"
   binary "/usr/local/share/dotnet/dotnet"
 
   uninstall pkgutil: [
-    "com.microsoft.dotnet.*",
-    "com.microsoft.netstandard.pack.targeting.*",
-  ],
+              "com.microsoft.dotnet.*",
+              "com.microsoft.netstandard.pack.targeting.*",
+            ],
             delete:  [
               "/etc/paths.d/dotnet",
               "/etc/paths.d/dotnet-cli-tools",

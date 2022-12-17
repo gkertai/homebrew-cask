@@ -1,11 +1,16 @@
 cask "removebg" do
-  version "1.4.1"
-  sha256 "ec7e974c6f3e7c6d5b0e8181a4bf1b8a473ff872ea7d34f1339fa8ff104e59af"
+  version "1.4.6"
+  sha256 "aac64cb5211cf14ea09ee6f95ca404b3893c967e0710db3942e44963c1d35bc4"
 
   url "https://static.remove.bg/download/removebg-for-mac-#{version}.dmg"
-  appcast "https://www.remove.bg/windows-mac-linux/download"
   name "remove.bg"
+  desc "Automatic bulk background removal"
   homepage "https://www.remove.bg/"
+
+  livecheck do
+    url "https://www.remove.bg/windows-mac-linux/download"
+    regex(%r{/removebg[._-]for[._-]mac[._-](\d+(?:\.\d+)+)\.dmg}i)
+  end
 
   app "remove.bg.app"
 end

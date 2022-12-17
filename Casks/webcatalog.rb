@@ -1,12 +1,16 @@
 cask "webcatalog" do
-  version "31.4.0"
-  sha256 "dc5aad9ca2f75b347bd736dad8c24927d378b1f2f79eaafcfa7f9439d9e01a37"
+  version "44.2.2"
+  sha256 "ac9b3663ba8ce7a885c35c24aee673316981e5981019496e46e56e15e35cc538"
 
-  url "https://github.com/webcatalog/webcatalog-app/releases/download/v#{version}/WebCatalog-#{version}.dmg",
-      verified: "github.com/webcatalog/webcatalog-app/"
+  url "https://cdn-2.webcatalog.io/webcatalog/WebCatalog-#{version}-universal.dmg"
   name "WebCatalog"
   desc "Tool to run web apps like desktop apps"
-  homepage "https://webcatalog.app/"
+  homepage "https://webcatalog.io/"
+
+  livecheck do
+    url "https://cdn-2.webcatalog.io/webcatalog/latest-mac.yml"
+    strategy :electron_builder
+  end
 
   auto_updates true
 

@@ -1,6 +1,6 @@
 cask "raven-reader" do
-  version "1.0.51"
-  sha256 "17d5d7198c6ad19c6349575922147cc6f9ed2e364b4ea1c3e1628c384450b097"
+  version "1.0.78"
+  sha256 "b0f54f35b6ab6fd77cb5136719f12e72746d6f7f5c59d2d05427166fc55f3747"
 
   url "https://download.helloefficiency.com/ravenreader/Raven%20Reader-#{version}.dmg",
       verified: "download.helloefficiency.com/ravenreader/"
@@ -16,4 +16,13 @@ cask "raven-reader" do
   auto_updates true
 
   app "Raven Reader.app"
+
+  zap trash: [
+    "~/Library/Application Support/Raven Reader",
+    "~/Library/Caches/org.helloefficiency.ravenreader",
+    "~/Library/Caches/org.helloefficiency.ravenreader.ShipIt",
+    "~/Library/Logs/Raven Reader",
+    "~/Library/Preferences/org.helloefficiency.ravenreader.plist",
+    "~/Library/Saved Application State/org.helloefficiency.ravenreader.savedState",
+  ]
 end

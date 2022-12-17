@@ -1,28 +1,28 @@
 cask "seamonkey" do
-  version "2.53.7.1"
+  version "2.53.14"
 
   language "de" do
-    sha256 "e9d38b495ad95f980852caa6126c3ec6c3ee96f7df3e8579dc468a7d44dc2ffa"
+    sha256 "9bf3f01c634b602d09a1b6824566946689a3beee948069761af34d9e7f71e8f6"
     "de"
   end
   language "en-GB" do
-    sha256 "0708c7faf96090ebbf2d0d27a321bff24c2c6dc74550be71a353d5aadf896b80"
+    sha256 "bce8a04b44f0848476747e1dcf6fc5ce587bfdcacb9772299d629293c8ef6e4c"
     "en-GB"
   end
   language "en-US", default: true do
-    sha256 "d119078149d42c5055558339c413e1a86341fbc7431fddd49833eadf7521958c"
+    sha256 "c3dc74bebf34666a12526c407c8ac088da58f97f871b42b20b259908a8de790b"
     "en-US"
   end
   language "fr" do
-    sha256 "5b76846616780743f655fa005369db432fb1b9925ba98c924a873e4cec3d81a0"
+    sha256 "a2e011dcd19a3886f0c3b6e262efb1294999634bc3fffb17a794ac5b1ad7aad8"
     "fr"
   end
   language "it" do
-    sha256 "5241f802670be852406b66784598f901ae92121ef540d4136e4b7179b159628e"
+    sha256 "228291368b8ec0b25d0af656a60f37dc4dff1f070443c522eaa824cc451fc570"
     "it"
   end
   language "ru" do
-    sha256 "e46dc04b8f917011df15a722d5f732fc4f4d36251d2a9494edaa068ec084cb1c"
+    sha256 "5720a410849c5626f4cde3ea92cdbdc773c96eaad08839608b7dec11d54d4619"
     "ru"
   end
 
@@ -34,11 +34,17 @@ cask "seamonkey" do
 
   livecheck do
     url "https://www.seamonkey-project.org/releases/"
-    strategy :page_match
-    regex(%r{href=.*?/seamonkey-(\d+(?:\.\d+)*)\.en-US\.mac\.dmg}i)
+    regex(%r{href=.*?/seamonkey-(\d+(?:\.\d+)+)\.en-US\.mac\.dmg}i)
   end
 
   auto_updates true
 
   app "SeaMonkey.app"
+
+  zap trash: [
+    "~/Library/Application Support/SeaMonkey",
+    "~/Library/Caches/SeaMonkey",
+    "~/Library/Preferences/org.mozilla.seamonkey.plist",
+    "~/Library/Saved Application State/org.mozilla.seamonkey.savedState",
+  ]
 end

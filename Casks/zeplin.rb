@@ -1,5 +1,5 @@
 cask "zeplin" do
-  version "3.19,1176"
+  version "4.6.2,1722"
   sha256 :no_check
 
   url "https://api.zeplin.io/urls/download-mac"
@@ -13,13 +13,13 @@ cask "zeplin" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :catalina"
 
   app "Zeplin.app"
 
   zap trash: [
-    "~/Library/Logs/Zeplin",
     "~/Library/Caches/io.zeplin.osx",
+    "~/Library/Logs/Zeplin",
     "~/Library/Preferences/io.zeplin.osx.plist",
   ]
 end

@@ -1,5 +1,5 @@
 cask "workplace-chat" do
-  version "1.0.91"
+  version "155.0.0.55.218"
   sha256 :no_check
 
   url "https://www.facebook.com/work/chat/download/mac",
@@ -9,7 +9,8 @@ cask "workplace-chat" do
   homepage "https://www.facebook.com/workplace/chat-app"
 
   livecheck do
-    skip "unversioned URL"
+    url :url
+    strategy :header_match
   end
 
   app "Workplace Chat.app"

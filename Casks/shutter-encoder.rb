@@ -1,26 +1,22 @@
 cask "shutter-encoder" do
-  version "15.0"
+  arch arm: "Apple Silicon", intel: "Mac 64bits"
 
-  if Hardware::CPU.intel?
-    sha256 "35840dcf6c4fcf8f3970c6a5bc03ebfb5c26a63320686e892164832ea609d5b4"
+  version "16.6"
+  sha256 arm:   "711aa21f65dd3a89925a731929d975304c551b76d260a2ffe25a4710aa28bf4a",
+         intel: "deaaa422f17c01539c262e2eae3320ee1278e083331ca2c28d4a3646cd074528"
 
-    url "https://www.shutterencoder.com/Shutter%20Encoder%20#{version}%20Mac%2064bits.pkg"
-    pkg "Shutter Encoder #{version} Mac 64bits.pkg"
-  else
-    sha256 "b65c42574b846a7bef052b28b459c4e0acc1c43ddd0147732dbd177580330f34"
-
-    url "https://www.shutterencoder.com/Shutter%20Encoder%20#{version}%20Apple%20Silicon.pkg"
-    pkg "Shutter Encoder #{version} Apple Silicon.pkg"
-  end
-
+  url "https://www.shutterencoder.com/Shutter%20Encoder%20#{version}%20#{arch.gsub(" ", "%20")}.pkg"
   name "Shutter Encoder"
   desc "Video, audio and image converter"
   homepage "https://www.shutterencoder.com/"
 
   livecheck do
     url "https://www.shutterencoder.com/changelog.txt"
-    regex(/Version\s*(\d+(?:\.\d+)*)\s*-/i)
+    regex(/^\s*Version\s*(\d+(?:\.\d+)+)/i)
   end
 
-  uninstall pkgutil: "com.paulpacifico.pkg.ShutterEncoder"
+  pkg "Shutter Encoder #{version} #{arch}.pkg"
+
+  uninstall pkgutil: "com.paulpacifico.shutterencoder",
+            quit:    "com.paulpacifico.shutterencoder"
 end

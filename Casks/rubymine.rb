@@ -1,14 +1,11 @@
 cask "rubymine" do
-  version "2021.1.1,211.7142.41"
+  arch arm: "-aarch64"
 
-  if Hardware::CPU.intel?
-    sha256 "dab2fdf132981de92818ebdc235874ee507c1e58eb68574f42791b2c0927edef"
-    url "https://download.jetbrains.com/ruby/RubyMine-#{version.before_comma}.dmg"
-  else
-    sha256 "0cd0d267d54e1f8ed14595a055fe8041a811d42fa4ae3b1d7f091278042741ae"
-    url "https://download.jetbrains.com/ruby/RubyMine-#{version.before_comma}-aarch64.dmg"
-  end
+  version "2022.3,223.7571.183"
+  sha256 arm:   "d1036002056505b6093e7c8db7d3658e263d64001eccb13b71e170576a00f7de",
+         intel: "132cf0d5fd2b5cb66a84040ca9ef1faf06defa58f941722e746206e817529095"
 
+  url "https://download.jetbrains.com/ruby/RubyMine-#{version.csv.first}#{arch}.dmg"
   name "RubyMine"
   desc "Ruby on Rails IDE"
   homepage "https://www.jetbrains.com/ruby/"
@@ -16,19 +13,20 @@ cask "rubymine" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=RM&latest=true&type=release"
     strategy :page_match do |page|
-      version = page.match(/"version":"(\d+(?:\.\d+)*)/i)
-      build = page.match(/"build":"(\d+(?:\.\d+)*)/i)
-      "#{version[1]},#{build[1]}"
+      JSON.parse(page)["RM"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "RubyMine.app"
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "mine") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

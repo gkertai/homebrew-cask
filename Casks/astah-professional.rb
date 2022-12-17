@@ -1,14 +1,27 @@
 cask "astah-professional" do
-  version "8.3.0,b9757d"
-  sha256 "342766520cab8d55440bd07e947267fd4363347ba5d26d6390957fc3287790ff"
+  version "9.0.0,1778f1"
+  sha256 "7c43cc3f2ed289c0acd07035245f32e27b9535317a7abdafa9a2578245c01cd6"
 
-  url "https://cdn.change-vision.com/files/astah-professional-#{version.before_comma.dots_to_underscores}-#{version.after_comma}-MacOs.dmg",
+  url "https://cdn.change-vision.com/files/astah-professional-#{version.csv.first.dots_to_underscores}-#{version.csv.second}-MacOs.dmg",
       verified: "cdn.change-vision.com/files/"
-  appcast "https://astah.net/download"
   name "Change Vision Astah Professional"
+  desc "Software modeling tool"
   homepage "https://astah.net/editions/professional"
 
-  pkg "astah professional ver #{version.before_comma.dots_to_underscores}.pkg"
+  livecheck do
+    url "https://members.change-vision.com/download/files/astah_professional/latest/mac_pkg"
+    regex(/astah[._-]professional[._-]v?(\d+(?:[._]\d+)+)[._-](\h+)[._-]MacOs\.dmg/i)
+    strategy :header_match do |headers, regex|
+      match = headers["location"].match(regex)
+      next if match.blank?
 
-  uninstall pkgutil: "com.change-vision.astahprofessional.astahprofessional.pkg"
+      "#{match[1].tr("_", ".")},#{match[2]}"
+    end
+  end
+
+  depends_on macos: ">= :catalina"
+
+  pkg "astah professional ver #{version.csv.first.dots_to_underscores}.pkg"
+
+  uninstall pkgutil: "com.change-vision.astah.professional"
 end

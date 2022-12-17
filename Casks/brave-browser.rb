@@ -1,33 +1,24 @@
 cask "brave-browser" do
-  version "90.1.24.82,124.82"
+  arch arm: "arm64", intel: "x64"
+  folder = on_arch_conditional arm: "stable-arm64", intel: "stable"
 
-  if Hardware::CPU.intel?
-    sha256 "eb94852f412318a29427f7f8c5b052433caac92f038f4ef35ff5978c8b7b2d05"
+  version "1.46.144.0,146.144"
+  sha256 arm:   "05711cbed34ab01be71728fc21491f88c17956c4f30e2e61a17f40c97e8b2b42",
+         intel: "13fe0f560e37acd518e47bc2168ce25032bdc6e9e23daf5661e0610dba53043a"
 
-    url "https://updates-cdn.bravesoftware.com/sparkle/Brave-Browser/stable/#{version.after_comma}/Brave-Browser-x64.dmg",
-        verified: "updates-cdn.bravesoftware.com/sparkle/Brave-Browser/"
-
-    livecheck do
-      url "https://updates.bravesoftware.com/sparkle/Brave-Browser/stable/appcast.xml"
-      strategy :sparkle
-    end
-  else
-    sha256 "d02996821a0b2e97aa8a740370cfcc6e6205d2a4bf6e2401385b9c239c988e31"
-
-    url "https://updates-cdn.bravesoftware.com/sparkle/Brave-Browser/stable-arm64/#{version.after_comma}/Brave-Browser-universal.dmg",
-        verified: "updates-cdn.bravesoftware.com/sparkle/Brave-Browser/"
-
-    livecheck do
-      url "https://updates.bravesoftware.com/sparkle/Brave-Browser/stable-arm64/appcast.xml"
-      strategy :sparkle
-    end
-  end
-
+  url "https://updates-cdn.bravesoftware.com/sparkle/Brave-Browser/#{folder}/#{version.csv.second}/Brave-Browser-#{arch}.dmg",
+      verified: "updates-cdn.bravesoftware.com/sparkle/Brave-Browser/"
   name "Brave"
   desc "Web browser focusing on privacy"
   homepage "https://brave.com/"
 
+  livecheck do
+    url "https://updates.bravesoftware.com/sparkle/Brave-Browser/#{folder}/appcast.xml"
+    strategy :sparkle
+  end
+
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "Brave Browser.app"
 

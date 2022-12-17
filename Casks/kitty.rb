@@ -1,6 +1,6 @@
 cask "kitty" do
-  version "0.20.3"
-  sha256 "fbab03de7cf378542391339944fbaf4c3659491aa5cbd6e00d274dc4bf4de2fc"
+  version "0.26.5"
+  sha256 "6e1dcfebfd0d1c4c2ebfcfbdebe688afd08a4077c4ac00db4b507feee9307353"
 
   url "https://github.com/kovidgoyal/kitty/releases/download/v#{version}/kitty-#{version}.dmg"
   name "kitty"
@@ -15,7 +15,7 @@ cask "kitty" do
   binary shimscript, target: "kitty"
 
   preflight do
-    IO.write shimscript, <<~EOS
+    File.write shimscript, <<~EOS
       #!/bin/sh
       exec '#{appdir}/kitty.app/Contents/MacOS/kitty' "$@"
     EOS
@@ -23,7 +23,9 @@ cask "kitty" do
 
   zap trash: [
     "~/.config/kitty",
+    "~/Library/Caches/kitty",
     "~/Library/Preferences/kitty",
+    "~/Library/Preferences/net.kovidgoyal.kitty.plist",
     "~/Library/Saved Application State/net.kovidgoyal.kitty.savedState",
   ]
 end

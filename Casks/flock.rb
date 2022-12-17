@@ -1,6 +1,6 @@
 cask "flock" do
-  version "2.2.494"
-  sha256 "b41a7776e1f709fed6a2294828504ff4be8b6f97975798323c8bd0ce67325c65"
+  version "2.2.511"
+  sha256 "0019e1db5e001d4f0cbb12b40d45360ba1ceae3438ea8aa61c7ba26791145a1a"
 
   url "https://updates.flock.co/fl_mac_electron/Flock-macOS-#{version}.dmg",
       verified: "flock.co/"
@@ -14,4 +14,11 @@ cask "flock" do
   end
 
   app "Flock.app"
+
+  zap trash: [
+    "~/Library/Application Support/Flock",
+    "~/Library/Logs/Flock",
+    "~/Library/Preferences/to.go.osx.plist",
+    "~/Library/Saved Application State/to.go.osx.savedState",
+  ]
 end

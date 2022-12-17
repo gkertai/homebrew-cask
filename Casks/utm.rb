@@ -1,6 +1,6 @@
 cask "utm" do
-  version "2.0.27"
-  sha256 "aebeb2e756824cd8a9a12596c37b3294865b5e35c6413aa9ea3f46685715db4a"
+  version "4.0.9"
+  sha256 "b28d5e790ffb3efe09044d6b1438185889c89cbc02eb179f37f96fd72903441a"
 
   url "https://github.com/utmapp/UTM/releases/download/v#{version}/UTM.dmg",
       verified: "github.com/utmapp/UTM/"
@@ -8,11 +8,24 @@ cask "utm" do
   desc "Virtual machines UI using QEMU"
   homepage "https://getutm.app/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+    regex(%r{href=.*?/tag/v?(\d+(?:[.-]\d+)+)["' >]}i)
+  end
+
+  conflicts_with cask: "homebrew/cask-versions/utm-beta"
+
   app "UTM.app"
 
   uninstall quit: "com.utmapp.UTM"
 
   zap trash: [
+    "~/Library/Application Scripts/com.utmapp.QEMUHelper",
+    "~/Library/Application Scripts/com.utmapp.UTM",
+    "~/Library/Containers/com.utmapp.QEMUHelper",
+    "~/Library/Containers/com.utmapp.UTM",
+    "~/Library/Group Containers/*.com.utmapp.UTM",
     "~/Library/Preferences/com.utmapp.UTM.plist",
     "~/Library/Saved Application State/com.utmapp.UTM.savedState",
   ]

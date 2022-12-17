@@ -1,25 +1,29 @@
 cask "vienna" do
-  version "3.7.1,7437"
-  sha256 "3b6879e55ccc95ba965e6868084f5f3dd1d8d937f20f7c95730f1b8aedc2ba9a"
+  version "3.8.4"
+  sha256 "b3e06a80f0eb7377f278fb562c7b14779a99790522bc1ea6ac3203dd09433aca"
 
-  url "https://github.com/ViennaRSS/vienna-rss/releases/download/v%2F#{version.before_comma}/Vienna#{version.before_comma}.tar.gz",
-      verified: "github.com/ViennaRSS/vienna-rss/"
+  url "https://downloads.sourceforge.net/vienna-rss/v_#{version}/Vienna#{version}.tgz",
+      verified: "downloads.sourceforge.net/vienna-rss/"
   name "Vienna"
   desc "RSS and Atom reader"
   homepage "https://www.vienna-rss.com/"
 
   livecheck do
     url "https://www.vienna-rss.com/sparkle-files/changelog.xml"
-    strategy :sparkle do |item|
-      "#{item.short_version.sub(/ :[^:]+:/, "")},#{item.version}"
+    regex(/Vienna[._-]?v?(\d+(?:\.\d+)+)\.t/i)
+    strategy :sparkle do |items, regex|
+      items.map { |item| item.url[regex, 1] }
     end
   end
+
+  auto_updates true
+  depends_on macos: ">= :sierra"
 
   app "Vienna.app"
 
   zap trash: [
-    "~/Library/Application Support/Vienna",
     "~/Library/Application Scripts/uk.co.opencommunity.vienna2",
+    "~/Library/Application Support/Vienna",
     "~/Library/Caches/uk.co.opencommunity.vienna2",
     "~/Library/Cookies/uk.co.opencommunity.vienna2.binarycookies",
     "~/Library/HTTPStorages/uk.co.opencommunity.vienna2.binarycookies",

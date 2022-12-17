@@ -1,8 +1,8 @@
 cask "reflector" do
-  version "4.0.1,222"
-  sha256 "c035cb5e21317d7677fb6c482309735e2b2e5bbb0212add03a13010cb87e9ca6"
+  version "4.1.0,259"
+  sha256 "88c59210d290abd21393c9711590c3f5ca5c5aee38568bb8f75d30031dc90089"
 
-  url "https://download.airsquirrels.com/Reflector#{version.major}/Mac/Reflector-#{version.before_comma}.dmg"
+  url "https://download.airsquirrels.com/Reflector#{version.major}/Mac/Reflector-#{version.csv.first}.dmg"
   name "Reflector"
   desc "Wireless screen-mirroring application"
   homepage "https://www.airsquirrels.com/reflector/"

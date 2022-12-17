@@ -1,8 +1,11 @@
 cask "tandem" do
-  version "1.6.419"
-  sha256 "6204f02231275bf143d2237b404d5834c1c76f0e617ee92843b1c8322fce24df"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://download.todesktop.com/200527auaqaacsy/Tandem%20#{version}.dmg",
+  version "2.2.1130"
+  sha256 arm:   "79f180e2a33a0d609b2a61f018622dbffb22054e66c75587a200908e206a648b",
+         intel: "7b66d8e1bdcaef38e06c124577c1391ace575bde5cf7f0cfc02d7ced5bca5643"
+
+  url "https://download.todesktop.com/200527auaqaacsy/Tandem%20#{version}-#{arch}.dmg",
       verified: "download.todesktop.com/200527auaqaacsy/"
   name "Tandem"
   desc "Virtual office for remote teams"

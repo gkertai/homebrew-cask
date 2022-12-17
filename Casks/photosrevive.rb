@@ -1,16 +1,24 @@
 cask "photosrevive" do
-  version "1.3.0,6029"
-  sha256 "a7f265d6855be39418db73cc1613c3f9f4cc3526e2e7e57dcb7278331791cebd"
+  version "2.0.8,b710745c-9a0e-41b4-b41c-712c32c2ff1b"
+  sha256 "72c744263b145c1924b68804fd6e188ae5a0ca50d4b74f500a912ccb9cdf979b"
 
-  url "https://neededapps.com/appcasts/photosrevive/versions/PR-#{version.before_comma}.zip"
+  url "https://neededapps.nyc3.digitaloceanspaces.com/media/public/#{version.csv.second}.zip",
+      verified: "neededapps.nyc3.digitaloceanspaces.com"
   name "PhotosRevive"
   desc "Colorize old black and white photos automatically"
   homepage "https://neededapps.com/photosrevive/"
 
   livecheck do
     url "https://neededapps.com/appcasts/photosrevive/changelog.xml"
-    strategy :sparkle
+    strategy :sparkle do |item|
+      hex = item.url[%r{/([\h-]+)\.zip}i, 1]
+      next if hex.blank?
+
+      "#{item.short_version},#{hex}"
+    end
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "PhotosRevive.app"
 

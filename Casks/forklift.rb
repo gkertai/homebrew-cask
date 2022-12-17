@@ -1,8 +1,8 @@
 cask "forklift" do
-  version "3.5.2,214"
-  sha256 "d04f4c31641fffaef7293d98cd508c4058b83a1141c752424f3d49a5a5e1cb84"
+  version "3.5.8,220"
+  sha256 "0d7c4a2b8045eb6e700001cef73a1c80058c7829a8bd8eada45efa4d35cc5207"
 
-  url "https://download.binarynights.com/ForkLift#{version.before_comma}.zip"
+  url "https://download.binarynights.com/ForkLift#{version.csv.first}.zip"
   name "ForkLift"
   desc "Finder replacement and FTP, SFTP, WebDAV and Amazon s3 client"
   homepage "https://binarynights.com/"

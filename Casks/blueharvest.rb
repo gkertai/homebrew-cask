@@ -1,21 +1,18 @@
 cask "blueharvest" do
-  version "8.0.9"
-  sha256 "a7d9601f8904b054031144a7c721551e09e950da0a865e552205dd64378b87f6"
+  version "8.1.4"
+  sha256 "284f4cb0c613600763508fb9255becaa2cdfe01ff9b38bacea9323dcd2b8469e"
 
-  url "https://zeroonetwenty.com/blueharvest/downloads/BlueHarvest#{version.no_dots}.dmg"
+  url "https://zeroonetwenty.com/blueharvest/downloads/BlueHarvest#{version.no_dots}0.dmg"
   name "BlueHarvest"
   desc "Remove metadata files from external drives"
   homepage "https://zeroonetwenty.com/blueharvest/"
 
   livecheck do
     url "https://zeroonetwenty.com/blueharvest/release-notes.html"
-    strategy :page_match do |page|
-      page.scan(%r{href=.*?/BlueHarvest(\d+)(\d+)(\d+)\.dmg}i).map do |match|
-        "#{match[0]}.#{match[1]}.#{match[2]}"
-      end
-    end
+    regex(/>\s*Version\s+(\d+(?:\.\d+)+)/i)
   end
 
+  auto_updates true
   depends_on macos: ">= :catalina"
 
   app "BlueHarvest.app"

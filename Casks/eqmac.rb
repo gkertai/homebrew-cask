@@ -1,17 +1,21 @@
 cask "eqmac" do
-  version "0.3.7"
-  sha256 "3285aa75f8735e89d8bd2ffa5be1d859b6cc7b9d9f0dc5864142aaf3a0ffa470"
+  version "1.6.2"
+  sha256 "94a17fc64d140e852b12c1965efd6123ec98344bb345451ae8d5c858a7167a4f"
 
-  url "https://github.com/bitgapp/eqMac/releases/download/v#{version}/eqMac.pkg",
+  url "https://github.com/bitgapp/eqMac/releases/download/v#{version}/eqMac.dmg",
       verified: "github.com/bitgapp/eqMac/"
   name "eqMac"
   desc "System-wide audio equalizer"
   homepage "https://eqmac.app/"
 
-  pkg "eqMac.pkg"
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
-  uninstall pkgutil: "com.bitgapp.eqmac.pkg",
-            quit:    "com.bitgapp.eqmac"
+  auto_updates true
+
+  app "eqMac.app"
 
   zap trash: [
     "~/Library/Caches/com.bitgapp.eqmac",

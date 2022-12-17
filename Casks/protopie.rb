@@ -1,6 +1,6 @@
 cask "protopie" do
-  version "5.4.2"
-  sha256 "b431687013ca6756c1ab2f0fd5ef9d13a779f0837ac23c2799f2b462d1a78598"
+  version "7.3.3"
+  sha256 "133f00ec11f95cd6287abd76bd82ded37b441138d1991380a6b245b2b94962a5"
 
   url "https://release.protopie.io/ProtoPie-#{version}.dmg"
   name "ProtoPie"
@@ -15,4 +15,10 @@ cask "protopie" do
   auto_updates true
 
   app "ProtoPie.app"
+
+  zap trash: [
+    "~/Library/Application Support/ProtoPie",
+    "~/Library/Preferences/io.protopie.plist",
+    "~/Library/Saved Application State/io.protopie.savedState",
+  ]
 end

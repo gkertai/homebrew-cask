@@ -1,9 +1,9 @@
 cask "accordance" do
-  version "13.1.7"
-  sha256 "a115c50fabddfb4b7d6b940db8fcf729d2b06817f60bc5c2fbe4d52e6496d3b2"
+  version "14.0.3"
+  sha256 "97ab4841dfaa8c0dde7f8b24a5988e97e6738cf43cc2df4caae49f5ef779c2a0"
 
-  url "https://accordancefiles1.com/products/Accordance_#{version}.dmg",
-      verified: "accordancefiles1.com/"
+  url "https://aaeaa95e7a277e07438c-1bc4b418142835c9d827936172799c04.ssl.cf1.rackcdn.com/Acc_#{version}.zip",
+      verified: "aaeaa95e7a277e07438c-1bc4b418142835c9d827936172799c04.ssl.cf1.rackcdn.com/"
   name "Accordance Bible Software"
   desc "Bible study software"
   homepage "https://www.accordancebible.com/"
@@ -14,6 +14,7 @@ cask "accordance" do
   end
 
   auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "Accordance.app"
 

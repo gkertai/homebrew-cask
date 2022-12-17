@@ -1,6 +1,6 @@
 cask "pppc-utility" do
-  version "1.3.0"
-  sha256 "95353ed47703578061e8a0ff5b168b467632fee1d0e01ee3851147279d0fc40e"
+  version "1.5.0"
+  sha256 "208f066e176197424cbbf8dd0803e9407c800de621c322feb566d20b9f3be32c"
 
   url "https://github.com/jamf/PPPC-Utility/releases/download/#{version}/PPPC-Utility.zip"
   name "PPPC Utility"

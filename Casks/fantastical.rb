@@ -1,8 +1,8 @@
 cask "fantastical" do
-  version "3.3.10,1292"
-  sha256 "19500b1ba445ca76046cca1e485cbda22cb09883938380a760c47793ae376d08"
+  version "3.7.5,1544"
+  sha256 "9d862a8698968b277093f3416fe8f25c1f7dc6674360c483f0bc187978d390b1"
 
-  url "https://cdn.flexibits.com/Fantastical_#{version.before_comma}.zip"
+  url "https://cdn.flexibits.com/Fantastical_#{version.csv.first}.zip"
   name "Fantastical"
   desc "Calendar software"
   homepage "https://flexibits.com/fantastical"
@@ -13,18 +13,21 @@ cask "fantastical" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Fantastical.app"
 
   uninstall launchctl: "com.flexibits.fantastical#{version.major}.mac.launcher",
-            quit:      "com.flexibits.fantastical#{version.major}.mac"
+            quit:      [
+              "85C27NK92C.com.flexibits.fantastical#{version.major}.mac.helper",
+              "com.flexibits.fantastical#{version.major}.mac",
+            ]
 
   zap trash: [
-    "~/Library/Preferences/com.flexibits.fantastical.plist",
-    "~/Library/Application Scripts/com.flexibits.fbcaldav.*",
     "~/Library/Application Scripts/com.flexibits.fantastical#{version.major}.*",
-    "~/Library/Containers/com.flexibits.fbcaldav.*",
+    "~/Library/Application Scripts/com.flexibits.fbcaldav.*",
     "~/Library/Containers/com.flexibits.fantastical#{version.major}.*",
+    "~/Library/Containers/com.flexibits.fbcaldav.*",
+    "~/Library/Preferences/com.flexibits.fantastical.plist",
   ]
 end

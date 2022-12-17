@@ -1,15 +1,15 @@
 cask "adobe-acrobat-reader" do
-  version "21.001.20145"
-  sha256 "c103f106a22027d7e1bfcb39a8bebce014ddd779818991f471ebece246ebd39f"
+  version "22.003.20281"
+  sha256 "43ccafc2cd8321119720b21c5b2821ac9d7e71c7eeb4eb85f09687ebceb0eefe"
 
   url "https://ardownload2.adobe.com/pub/adobe/reader/mac/AcrobatDC/#{version.no_dots}/AcroRdrDC_#{version.no_dots}_MUI.dmg"
-  name "Adobe Acrobat Reader DC"
+  name "Adobe Acrobat Reader"
   desc "View, print, and comment on PDF documents"
   homepage "https://acrobat.adobe.com/us/en/acrobat/pdf-reader.html"
 
   livecheck do
-    url "https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html"
-    regex(/<em>(\d+(?:\.\d+)*) /i)
+    url "https://armmf.adobe.com/arm-manifests/mac/AcrobatDC/reader/current_version.txt"
+    regex(/(\d+(?:\.\d+)+)/i)
   end
 
   auto_updates true
@@ -17,15 +17,18 @@ cask "adobe-acrobat-reader" do
   pkg "AcroRdrDC_#{version.no_dots}_MUI.pkg"
 
   uninstall pkgutil:   [
-    "com.adobe.acrobat.DC.reader.*",
-    "com.adobe.RdrServicesUpdater",
-    "com.adobe.armdc.app.pkg",
-  ],
-            delete:    "/Applications/Adobe Acrobat Reader DC.app",
+              "com.adobe.acrobat.DC.reader.*",
+              "com.adobe.armdc.app.pkg",
+              "com.adobe.RdrServicesUpdater",
+            ],
+            delete:    [
+              "/Applications/Adobe Acrobat Reader.app",
+              "/Library/Preferences/com.adobe.reader.DC.WebResource.plist",
+            ],
             quit:      [
-              "com.adobe.Reader",
-              "com.adobe.AdobeRdrCEFHelper",
               "com.adobe.AdobeRdrCEF",
+              "com.adobe.AdobeRdrCEFHelper",
+              "com.adobe.Reader",
             ],
             launchctl: [
               "com.adobe.ARMDC.Communicator",
@@ -34,11 +37,10 @@ cask "adobe-acrobat-reader" do
             ]
 
   zap trash: [
-    "~/Library/Preferences/com.adobe.Reader.plist",
-    "~/Library/Preferences/com.adobe.AdobeRdrCEFHelper.plist",
-    "~/Library/Preferences/com.adobe.crashreporter.plist",
     "~/Library/Caches/com.adobe.Reader",
     "~/Library/HTTPStorages/com.adobe.Reader.binarycookies",
-    "/Library/Preferences/com.adobe.reader.DC.WebResource.plist",
+    "~/Library/Preferences/com.adobe.AdobeRdrCEFHelper.plist",
+    "~/Library/Preferences/com.adobe.Reader.plist",
+    "~/Library/Preferences/com.adobe.crashreporter.plist",
   ]
 end

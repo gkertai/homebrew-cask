@@ -1,9 +1,9 @@
 cask "gifox" do
-  version "2.2.5,020205.01"
-  sha256 "30448da3b7473c6628c635075a5fc079d859a925c1def651aa628964cfc97335"
+  version "2.5.0,020500.00"
+  sha256 "ff7bc7539e26a7115111e0c7375b6b072a12bd2e352cd1e7c662d7491ef7996a"
 
-  url "https://d3si16icyi9iar.cloudfront.net/gifox/#{version.after_comma}.dmg",
-      verified: "d3si16icyi9iar.cloudfront.net/gifox/"
+  url "https://d1fqctmfkpkkcg.cloudfront.net/gifox/#{version.csv.second}.dmg",
+      verified: "d1fqctmfkpkkcg.cloudfront.net/gifox/"
   name "gifox"
   desc "App to record the screen"
   homepage "https://gifox.io/"
@@ -12,6 +12,8 @@ cask "gifox" do
     url "https://gifox.io/download/latest"
     strategy :header_match do |headers|
       match = headers["location"].match(%r{/(\d(\d)\d(\d)\d(\d).\d\d)\.dmg}i)
+      next if match.blank?
+
       "#{match[2]}.#{match[3]}.#{match[4]},#{match[1]}"
     end
   end

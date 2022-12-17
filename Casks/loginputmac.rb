@@ -1,10 +1,11 @@
 cask "loginputmac" do
-  version "2.4.4,23511"
-  sha256 "d2f8d0a5aeb1508b76b88e3ce7eb4abd561a5d19f3d6648a6b7aef2d95d5301f"
+  version "3.2.4,9091"
+  sha256 "c8d98d020e6ca89c7afaade04aafc830827975b2bcca2bdb5c94066100ae70e5"
 
-  url "https://loginput-mac2.content-delivery.top/loginputmac#{version.major}_latest.pkg",
-      verified: "loginput-mac2.content-delivery.top/"
+  url "https://loginput-mac2.totest.top/loginputmac#{version.major}_latest.dmg",
+      verified: "loginput-mac2.totest.top/"
   name "LoginputMac"
+  desc "Chinese input method"
   homepage "https://im.logcg.com/loginputmac#{version.major}"
 
   livecheck do
@@ -13,9 +14,20 @@ cask "loginputmac" do
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
-  pkg "loginputmac#{version.major}_latest.pkg"
+  pkg "落格输入法 macOS #{version.major}.pkg"
 
   uninstall pkgutil: "com.logcg.pkg.LoginputMac#{version.major}",
             quit:    "com.logcg.inputmethod.LogInputMac#{version.major}"
+
+  zap trash: [
+    "~/Documents/落格输入法",
+    "~/Library/Application Support/LogInputMac#{version.major}",
+    "~/Library/Application Support/com.logcg.inputmethod.LogInputMac#{version.major}",
+    "~/Library/Caches/com.logcg.inputmethod.LogInputMac#{version.major}",
+    "~/Library/HTTPStorages/com.logcg.inputmethod.LogInputMac#{version.major}",
+    "~/Library/Preferences/com.logcg.inputmethod.LogInputMac#{version.major}.plist",
+    "~/Library/Saved Application State/com.logcg.inputmethod.LogInputMac#{version.major}.Settings.savedState",
+  ]
 end
