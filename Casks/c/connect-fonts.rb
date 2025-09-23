@@ -1,0 +1,32 @@
+cask "connect-fonts" do
+  version "27.0.4"
+  sha256 "02765d62a5a80e247ecedf2fa8908b62bc24c56436762375e53eac6594348160"
+
+  url "https://bin.extensis.com/ConnectFonts-M-#{version.dots_to_hyphens}.dmg"
+  name "Connect Fonts"
+  desc "Font manager"
+  homepage "https://www.extensis.com/products/connect"
+
+  livecheck do
+    url "https://links.extensis.com/suitcase/sparkle?language=en&platform=mac&version=#{version}"
+    strategy :sparkle, &:short_version
+  end
+
+  auto_updates true
+
+  app "Connect Fonts.app"
+
+  # Connect Fonts uses many of the same paths as its predecessor, Suitcase Fusion.
+  zap trash: [
+        "~/.Extensis",
+        "~/Documents/Extensis Connect Assets",
+        "~/Library/Caches/com.extensis.SuitcaseFusion",
+        "~/Library/Extensis",
+        "~/Library/HTTPStorages/com.extensis.SuitcaseFusion",
+        "~/Library/HTTPStorages/com.extensis.SuitcaseFusion.binarycookies",
+        "~/Library/Logs/Extensis",
+        "~/Library/Preferences/com.extensis.SuitcaseFusion.plist",
+        "~/Library/WebKit/com.extensis.SuitcaseFusion",
+      ],
+      rmdir: "~/Documents/Extensis Connect Assets"
+end
